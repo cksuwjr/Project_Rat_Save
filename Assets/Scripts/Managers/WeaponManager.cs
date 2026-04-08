@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -11,30 +12,34 @@ public class WeaponManager : MonoBehaviour
     private bool fire4;
     private bool fire5;
 
-    [SerializeField] private Skill basicAttack;
-
     [SerializeField] private Skill skill1;
     [SerializeField] private Skill skill2;
     [SerializeField] private Skill skill3;
     [SerializeField] private Skill skill4;
-
-    [SerializeField] private Skill specialSkill;
+    [SerializeField] private Skill skill5;
 
     private void Awake()
     {
-        basicAttack.SetAuto(true);
+        
     }
 
     public void Init()
     {
-        basicAttack.Init();
+        //
+        skill1 = gameObject.AddComponent<Punch>();
+        skill2 = gameObject.AddComponent<Kick>();
+        
+        
 
+        
         skill1.Init();
-        skill2.Init();
-        skill3.Init();
-        skill4.Init();
+        skill1.skill_Level = 1;
 
-        specialSkill.Init();
+        skill2.Init();
+        skill2.skill_Level = 1;
+        //skill3.Init();
+        //skill4.Init();
+        //skill5.Init();
     }
 
 
@@ -46,7 +51,6 @@ public class WeaponManager : MonoBehaviour
             case KeyInput.Fire2: fire2 = true; break;
             case KeyInput.Fire3: fire3 = true; break;
             case KeyInput.Fire4: fire4 = true; break;
-
             case KeyInput.Fire5: fire5 = true; break;
         }
     }
@@ -111,24 +115,17 @@ public class WeaponManager : MonoBehaviour
 
     private void Skill5()
     {
-        specialSkill.Cast();
+        skill5.Cast();
 
         Debug.Log("스킬5 사용");
     }
 
     public void AllCoolTimeDecline(float time)
     {
-        basicAttack.CooltimeDecline(time);
-
-        if (skill1.skill_Level > 0) skill1.CooltimeDecline(time);
-        if (skill2.skill_Level > 0) skill2.CooltimeDecline(time);
-        if (skill3.skill_Level > 0) skill3.CooltimeDecline(time);
-        if (skill4.skill_Level > 0) skill4.CooltimeDecline(time);
-    }
-
-    public Skill GetSkillBasic()
-    {
-        return basicAttack;
+        skill1.CooltimeDecline(time);
+        skill2.CooltimeDecline(time);
+        skill3.CooltimeDecline(time);
+        skill4.CooltimeDecline(time);
     }
 
     public Skill GetSkillQ()
@@ -146,5 +143,9 @@ public class WeaponManager : MonoBehaviour
     public Skill GetSkillR()
     {
         return skill4;
+    }
+    public Skill GetSkillT()
+    {
+        return skill5;
     }
 }

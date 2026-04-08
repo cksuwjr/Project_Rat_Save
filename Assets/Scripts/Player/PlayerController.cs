@@ -22,7 +22,9 @@ public class PlayerController : Entity
     {
         TryGetComponent<IMove>(out movement);
         TryGetComponent<IInputHandle>(out inputHandle);
+
         TryGetComponent<WeaponManager>(out weaponManager);
+        weaponManager?.Init();
     }
 
     public override void GetDamage(Entity attacker, float damage, float knockbackTime = 3f)
@@ -48,22 +50,19 @@ public class PlayerController : Entity
     {
         InputVector = inputHandle.GetInput();
 
-     //   if (!isBinded)
-   //     {
- //           movement?.Move(inputHandle.GetInput());
-
-            //if (inputHandle.GetKeyInput(KeyInput.Fire1))
-            //    weaponManager.Fire(KeyInput.Fire1);
-            //if (inputHandle.GetKeyInput(KeyInput.Fire2))
-            //    weaponManager.Fire(KeyInput.Fire2);
-            //if (inputHandle.GetKeyInput(KeyInput.Fire3))
-            //    weaponManager.Fire(KeyInput.Fire3);
-            //if (inputHandle.GetKeyInput(KeyInput.Fire4))
-            //    weaponManager.Fire(KeyInput.Fire4);
-            //if (inputHandle.GetKeyInput(KeyInput.Fire5))
-            //    weaponManager.Fire(KeyInput.Fire5);
-        ///}
-        //weapon.Fire();
+        if (!isBinded)
+        {
+            if (inputHandle.GetKeyInput(KeyInput.Fire1))
+                weaponManager.Fire(KeyInput.Fire1);
+            if (inputHandle.GetKeyInput(KeyInput.Fire2))
+                weaponManager.Fire(KeyInput.Fire2);
+            if (inputHandle.GetKeyInput(KeyInput.Fire3))
+                weaponManager.Fire(KeyInput.Fire3);
+            if (inputHandle.GetKeyInput(KeyInput.Fire4))
+                weaponManager.Fire(KeyInput.Fire4);
+            if (inputHandle.GetKeyInput(KeyInput.Fire5))
+                weaponManager.Fire(KeyInput.Fire5);
+        }
     }
 
     private void FixedUpdate()

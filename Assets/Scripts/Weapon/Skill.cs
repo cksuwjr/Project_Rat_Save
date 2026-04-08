@@ -2,7 +2,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public abstract class Skill : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public abstract class Skill : MonoBehaviour
     protected float ReusableWaitTime;
     protected bool Castable;
     protected bool auto = false;
+    protected Animator animator;
 
     public Image skillImage;
     [SerializeField] protected Image cooltimeBox;
@@ -23,8 +23,14 @@ public abstract class Skill : MonoBehaviour
 
     [SerializeField] private AudioClip sound;
     private Color originColor;
+
+    
+
     public void Init()
     {
+        if (!TryGetComponent<Animator>(out animator))
+            animator = GetComponentInChildren<Animator>();
+
         if (!TryGetComponent<Entity>(out controller))
             Debug.LogError("해당 대상에 Entity.cs 가 없습니다!");
 
