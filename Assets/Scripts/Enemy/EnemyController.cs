@@ -22,8 +22,6 @@ public class EnemyController : Entity
 
     private bool hittable = true;
 
-    public Action<float, float, float> OnChangeHp;
-
     private bool isBinded = false;
 
     private Vector3 InputVector;
@@ -87,12 +85,12 @@ public class EnemyController : Entity
             {
                 SetMoveTarget(GameManager.Instance.Player.transform.position);
                 timer = 0f;
-
-                if(Vector3.Distance(transform.position, GameManager.Instance.Player.transform.position) < 3)
-                    ChangeState(EnemyState.Attack);
-
             }
-            movement?.Move(direction);
+
+            if (Vector3.Distance(transform.position, GameManager.Instance.Player.transform.position) < 2)
+                ChangeState(EnemyState.Attack);
+            else
+                movement?.Move(direction);
             yield return null;
         }
     }
@@ -118,6 +116,8 @@ public class EnemyController : Entity
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isDead) return;
+
         if (other.CompareTag("Player"))
         {
             StopAllCoroutines();
@@ -182,6 +182,7 @@ public class EnemyController : Entity
     {
         GameManager.Instance.Player.GetComponentInChildren<Animator>().SetTrigger("Die");
         base.Die();
+        StopAllCoroutines();
     }
 
 
@@ -250,8 +251,8 @@ public class EnemyController : Entity
 
     private IEnumerator Invinsible()
     {
-        hittable = false;
-        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+        //hittable = false;
+        yield return null;
         hittable = true;
     }
 }

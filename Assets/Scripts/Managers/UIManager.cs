@@ -8,17 +8,12 @@ using UnityEngine.UI;
 public class UIManager : SingletonDestroy<UIManager>, IManager
 {
     private GameObject canvas;
+    private GameObject playerCanvas;
 
     public void Init()
     {
         canvas = GameObject.Find("Canvas");
         GameManager.Instance.Player.TryGetComponent<PlayerController>(out var player);
-
-
-        //var hpPannel = canvas.transform.GetChild(4).gameObject;
-        //if (hpPannel.transform.GetChild(0).TryGetComponent<Image>(out var hpBar))
-        //    player.OnChangeHp += (prevHp, hp, maxhp) => FillImageAnim(hpBar, prevHp, hp, maxhp);
-
     }
 
 /*

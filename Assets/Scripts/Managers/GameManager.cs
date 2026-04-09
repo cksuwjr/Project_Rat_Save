@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     //private DataManager dataManager;
-    //private UIManager uiManager;
+    private UIManager uiManager;
     private SoundManager soundManager;
     private PoolManager poolManager;
     //private TitleSceneManager titleSceneManager;
@@ -40,10 +40,10 @@ public class GameManager : Singleton<GameManager>
         //GameObject.Find("DataManager")?.TryGetComponent<DataManager>(out dataManager);
         GameObject.Find("SoundManager")?.TryGetComponent<SoundManager>(out soundManager);
 
-        //if (GameObject.Find("UIManager"))
-        //    GameObject.Find("UIManager")?.TryGetComponent<UIManager>(out uiManager);
-        //else
-        //    uiManager = null;
+        if (GameObject.Find("UIManager"))
+            GameObject.Find("UIManager")?.TryGetComponent<UIManager>(out uiManager);
+        else
+            uiManager = null;
 
         if (GameObject.Find("PoolManager"))
             GameObject.Find("PoolManager")?.TryGetComponent<PoolManager>(out poolManager);
@@ -64,7 +64,7 @@ public class GameManager : Singleton<GameManager>
     private void InitManagers()
     {
         //dataManager?.Init();
-        //uiManager?.Init();
+        uiManager?.Init();
         poolManager?.Init();
         soundManager?.Init();
 

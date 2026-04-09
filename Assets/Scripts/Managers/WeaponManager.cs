@@ -18,6 +18,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private Skill skill4;
     [SerializeField] private Skill skill5;
 
+    public bool attackable = true;
+
     private void Awake()
     {
         
@@ -32,7 +34,7 @@ public class WeaponManager : MonoBehaviour
         
 
         
-        skill1.Init();
+        skill1.Init(0.6f);
         skill1.skill_Level = 1;
 
         skill2.Init();
@@ -57,6 +59,17 @@ public class WeaponManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!attackable)
+        {
+            fire1 = false;
+            fire2 = false;
+            fire3 = false;
+            fire4 = false;
+            fire5 = false;
+            return;
+        }
+            
+
         if (fire1)
         {
             Skill1();
