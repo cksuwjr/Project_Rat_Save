@@ -11,7 +11,7 @@ public class PlayerController : Entity
 
     private bool hittable = true;
 
-    public Action<float, float, float> OnChangeHp;
+    
 
     private bool isBinded = false;
 

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public abstract class Skill : MonoBehaviour
 {
     protected Entity controller;
+    protected WeaponManager weaponManager;
+
     public int skill_Level;
     [SerializeField] protected float cooltime;
     protected float ReusableWaitTime;
@@ -26,7 +28,7 @@ public abstract class Skill : MonoBehaviour
 
     
 
-    public void Init()
+    public void Init(float cooltime = 0)
     {
         if (!TryGetComponent<Animator>(out animator))
             animator = GetComponentInChildren<Animator>();
@@ -34,8 +36,10 @@ public abstract class Skill : MonoBehaviour
         if (!TryGetComponent<Entity>(out controller))
             Debug.LogError("해당 대상에 Entity.cs 가 없습니다!");
 
+        TryGetComponent<WeaponManager>(out weaponManager);
+
         if (cooltime == 0)
-            cooltime = 1f;
+            this.cooltime = 1f;
 
         Castable = true;
 
