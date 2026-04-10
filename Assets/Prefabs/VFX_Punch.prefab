@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3700851490151318324}
   - component: {fileID: 5748038767810965592}
   - component: {fileID: 6738136953199278908}
+  - component: {fileID: -7732582856545935047}
   m_Layer: 0
   m_Name: VFX_Punch
   m_TagString: Untagged
@@ -4899,6 +4900,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-7732582856545935047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2957842864923083962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb0a486f8f7f184797d1d25e6b68fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3590952529943170846
 GameObject:
   m_ObjectHideFlags: 0
