@@ -1327,7 +1327,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5.35
   m_Depth: -1
   m_CullingMask:
@@ -2917,6 +2917,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePool: {fileID: 0}
   monsterPool: {fileID: 0}
+  punchEffectPool: {fileID: 0}
+  aoeEffectPool: {fileID: 0}
 --- !u!1001 &676477095
 PrefabInstance:
   m_ObjectHideFlags: 0
