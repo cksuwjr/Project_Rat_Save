@@ -23,7 +23,7 @@ public class Entity : PoolObject
         isDead = false;
     }
 
-    public virtual void GetDamage(Entity attacker, float damage, float knockbackTime = 3f)
+    public virtual void GetDamage(Entity attacker, float damage, float knockbackTime = 3f, int effectNum = 0)
     {
         if (isDead) return;
 
@@ -34,6 +34,14 @@ public class Entity : PoolObject
         {
             damageObj.transform.position = transform.position + Camera.main.transform.up * 2;
             damageObj.Init(damage);
+
+            if (effectNum != 0)
+            {
+                Debug.Log("¿Ã∆Â∆Æ πﬂµø");
+                var effect = PoolManager.Instance.GetPool(effectNum).GetPoolObject();
+                effect.transform.position = transform.position;
+                effect.GetComponent<Effect>().Init();
+            }
         }
         if (status.HP <= 0)
         {

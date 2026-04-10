@@ -25,7 +25,7 @@ public class Kick : Skill
             {
                 Entity enemy;
                 col.TryGetComponent<Entity>(out enemy);
-                enemy?.GetDamage(controller, damage, 0.5f);
+                enemy?.GetDamage(controller, damage, 0.5f, 3);
             }
         }
         yield return YieldInstructionCache.WaitForSeconds(0.35f);
