@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class AttachedCanvas : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class AttachedCanvas : MonoBehaviour
         if (hpPannel.transform.GetChild(1).TryGetComponent<Image>(out var hpBar))
             controller.OnChangeHp += (prevHp, hp, maxhp) => UIManager.Instance.FillImageAnim(hpBar, prevHp, hp, maxhp);
         if (hpPannel.transform.GetChild(2).TryGetComponent<TextMeshProUGUI>(out var hpText))
-            controller.OnChangeHp += (prevHp, hp, maxhp) => hpText.text = hp.ToString();
+            controller.OnChangeHp += (prevHp, hp, maxhp) => hpText.text = $"{hp:F0}";
     }
 
     // Update is called once per frame
