@@ -192,7 +192,7 @@ public class EnemyController : Entity
 
     protected override void Die()
     {
-        GameManager.Instance.Player.GetComponentInChildren<Animator>().SetTrigger("Die");
+        transform.GetComponentInChildren<Animator>().SetTrigger("Die");
         base.Die();
         StopAllCoroutines();
     }
