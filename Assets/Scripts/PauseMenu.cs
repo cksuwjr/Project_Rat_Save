@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
+//By Jasmine
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
@@ -10,12 +12,47 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
-        Time.timeScale = 0;
+        if(pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 
-    public void Resume()
+    // public void Pause()
+    // {
+    //     if(pauseMenu.activeSelf)
+    //     {
+    //         pauseMenu.SetActive(true);
+    //         Time.timeScale = 0;
+    //     }
+    //     else
+    //     {
+    //         pauseMenu.SetActive(false);
+    //         Time.timeScale = 1;
+    //     }
+    // }
+
+    // public void Resume()
+    // {
+    //     pauseMenu.SetActive(false);
+    //     Time.timeScale = 1;
+    // }
+
+    public void MuteToggle(bool muted)
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
+        if (muted)
+        {
+            AudioListener.volume = 0;
+        }
+        else
+        {
+            AudioListener.volume = 1;
+        }
     }
 }
