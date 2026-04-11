@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerController : Entity
 {
@@ -41,7 +41,9 @@ public class PlayerController : Entity
 
     protected override void Die()
     {
-        GameManager.Instance.Player.GetComponentInChildren<Animator>().SetTrigger("Die");
+        if (isDead) return;
+
+        transform.GetComponentInChildren<Animator>().SetTrigger("Die");
         base.Die();
     }
 
@@ -62,6 +64,26 @@ public class PlayerController : Entity
                 weaponManager.Fire(KeyInput.Fire4);
             if (inputHandle.GetKeyInput(KeyInput.Fire5))
                 weaponManager.Fire(KeyInput.Fire5);
+
+
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                if (Camera.main.orthographic) return;
+                //Camera.main.transform.GetComponent<CameraMove>().SetDist();
+                Camera.main.orthographic = true;
+                Camera.main.orthographicSize = 5.35f;
+                Camera.main.GetComponent<CameraMove>().AddDist(new Vector3(0, -2.26f, 1.95f));
+
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                if (!Camera.main.orthographic) return;
+
+                Camera.main.orthographic = false;
+                Camera.main.fieldOfView = 60;
+                Camera.main.GetComponent<CameraMove>().AddDist(new Vector3(0, 2.26f, -1.95f));
+
+            }
         }
     }
 

@@ -32,7 +32,11 @@ public class WeaponManager : MonoBehaviour
 
     public void Init()
     {
-        ChangeWeapon(WeaponType.Hand);
+        var weapon = hand.GetComponentInChildren<WeaponObject>();
+        if (weapon)
+            ChangeWeapon(weapon.weaponType);
+        else
+            ChangeWeapon(WeaponType.Hand);
     }
 
     public void ChangeWeapon(WeaponType weapon)

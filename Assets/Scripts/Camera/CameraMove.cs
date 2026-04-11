@@ -26,6 +26,10 @@ public class CameraMove : MonoBehaviour
         dist = transform.position - objectTofollow.position;
     }
 
+    public void AddDist(Vector3 distance)
+    {
+        dist += distance;
+    }
 
     private void LateUpdate()
     {

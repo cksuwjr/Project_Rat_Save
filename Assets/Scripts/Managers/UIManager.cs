@@ -174,6 +174,10 @@ public class UIManager : SingletonDestroy<UIManager>, IManager
             timer += Time.deltaTime;
         }
         bar.fillAmount = fillValue / maxValue;
+
+        if (fillValue <= 0)
+            bar.transform.parent.parent.gameObject.SetActive(fillValue > 0);
+        
     }
 
 }
