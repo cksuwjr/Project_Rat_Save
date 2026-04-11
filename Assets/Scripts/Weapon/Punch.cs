@@ -20,10 +20,15 @@ public class Punch : Skill
 
             if ((controller.enemyLayer & (1 << col.gameObject.layer)) != 0)
             {
-                if(enemy)
+                if (col.GetComponent<Entity>())
+                    if (col.GetComponent<Entity>().isDead) continue;
+
+                if (enemy)
                 {
                     if (Vector3.Distance(enemy.transform.position, transform.position) > Vector3.Distance(col.transform.position, transform.position))
+                    {
                         col.TryGetComponent<Entity>(out enemy);
+                    }
                 }
                 else
                     col.TryGetComponent<Entity>(out enemy);
