@@ -74,6 +74,13 @@ public class WeaponManager : MonoBehaviour
                 break;
         }
 
+        if (!skill3)
+        {
+            skill3 = gameObject.AddComponent<RollingRat>();
+            skill3.Init(1);
+            skill3.skill_Level = 1;
+        }
+
         if (!skill5)
         {
             skill5 = gameObject.AddComponent<GetWeapon>();

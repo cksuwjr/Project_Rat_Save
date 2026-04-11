@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour, IMove
     // 이동량 계산을 위한 벡터
     private Vector3 moveDelta;
 
+    private Vector3 finalDir;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -48,6 +50,20 @@ public class PlayerMove : MonoBehaviour, IMove
             );
 
             rb.MoveRotation(newRotation);
+
+            finalDir = direction;
         }
+    }
+
+    public void Rolling(float speed)
+    {
+        moveDelta.x = finalDir.x;
+        moveDelta.y = 0;
+        moveDelta.z = finalDir.z;
+
+        moveDelta.Normalize();
+        moveDelta *= speed * Time.deltaTime;
+
+        rb.MovePosition(rb.position + moveDelta);
     }
 }
