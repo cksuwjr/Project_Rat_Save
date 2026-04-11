@@ -933,14 +933,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9021916176638155090, guid: c6db27f92be062d4aa76888de0dca5b2,
-        type: 3}
-      propertyPath: hand
-      value: 
-      objectReference: {fileID: 1545994008}
-    m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2477552772616028773, guid: c6db27f92be062d4aa76888de0dca5b2, type: 3}
     - target: {fileID: -7511558181221131132, guid: 1511be8132bebd7438a2841e96184c5a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1219,13 +1211,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3024590440788662737, guid: c6db27f92be062d4aa76888de0dca5b2,
+    - target: {fileID: 9021916176638155090, guid: c6db27f92be062d4aa76888de0dca5b2,
         type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1195262681}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 1545994008}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 2477552772616028773, guid: c6db27f92be062d4aa76888de0dca5b2, type: 3}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6db27f92be062d4aa76888de0dca5b2, type: 3}
 --- !u!4 &196618422 stripped
@@ -10332,9 +10326,10 @@ GameObject:
   - component: {fileID: 1195262684}
   - component: {fileID: 1195262683}
   - component: {fileID: 1195262682}
+  - component: {fileID: 1195262685}
   m_Layer: 3
   m_Name: Weapon
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10347,12 +10342,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195262680}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.71210986, y: -0.1545362, z: -0.4235196, w: -0.5381908}
-  m_LocalPosition: {x: -0.278, y: -0.116, z: -0.197}
-  m_LocalScale: {x: 0.124565765, y: 0.6713796, z: 0.12456581}
+  m_LocalRotation: {x: 0.67215115, y: -0.14882106, z: 0.35296884, w: 0.63362306}
+  m_LocalPosition: {x: 3, y: 0.1, z: 0.44974214}
+  m_LocalScale: {x: 0.124565795, y: 0.6713799, z: 0.124565855}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1545994008}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 243.818, y: 81.927, z: -32.300995}
 --- !u!65 &1195262682
 BoxCollider:
@@ -10425,6 +10420,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195262680}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1195262685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195262680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6382611b5784b8e42a7ec4cd5b9fd2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 1
+  weaponEquipPos: {x: -0.278, y: -0.116, z: -0.197}
+  weaponEquipRot: {x: 296.18158, y: 261.92682, z: 147.69855}
+  weaponEquipScale: {x: 0.124565765, y: 0.6713796, z: 0.12456581}
+  isUse: 0
 --- !u!1001 &1212787709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10674,14 +10686,8 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 198829641f1806f48af48577e42bf20c, type: 3}
---- !u!4 &572252109 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2b2795d93ef2952468ad689a8a215ea9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1148297297}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &580747143
+  m_SourcePrefab: {fileID: 100100000, guid: 1511be8132bebd7438a2841e96184c5a, type: 3}
+--- !u!1 &1227925337
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16327,9 +16333,10 @@ GameObject:
   - component: {fileID: 2015737169}
   - component: {fileID: 2015737168}
   - component: {fileID: 2015737167}
-  m_Layer: 3
+  - component: {fileID: 2015737170}
+  m_Layer: 0
   m_Name: Weapon (1)
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16364,7 +16371,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -16420,6 +16427,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015737165}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2015737170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015737165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6382611b5784b8e42a7ec4cd5b9fd2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  weaponEquipPos: {x: 0, y: 0, z: 0}
+  weaponEquipRot: {x: 0, y: 0, z: 0}
+  weaponEquipScale: {x: 0, y: 0, z: 0}
+  isUse: 1
 --- !u!4 &2021496470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b730b3b50dc02444be992081c1096b8,
@@ -18063,6 +18087,7 @@ SceneRoots:
   - {fileID: 88691720}
   - {fileID: 722801842}
   - {fileID: 1483833257}
+  - {fileID: 1195262681}
   - {fileID: 158298642}
   - {fileID: 57451765}
   - {fileID: 1846748968}
