@@ -44,7 +44,7 @@ public class GetWeapon : Skill
                     if (treshWeapon == weapon || weapon.isUse)
                     {
                         weapon = null;
-                        break;
+                        continue;
                     }
             }
         }
