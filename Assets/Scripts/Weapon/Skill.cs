@@ -3,23 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public enum SkillType
-{
-    Base,
-    Fire,
-    Electronic,
-}
-
-
 public abstract class Skill : MonoBehaviour
 {
     protected Entity controller;
     protected WeaponManager weaponManager;
 
     public int skill_Level;
-    protected SkillType skill_Type;
-
     [SerializeField] protected float cooltime;
     protected float ReusableWaitTime;
     protected bool Castable;
@@ -34,14 +23,12 @@ public abstract class Skill : MonoBehaviour
     public string inform;
 
 
-    public float damage = 1;
-
     [SerializeField] private AudioClip sound;
     private Color originColor;
 
     
 
-    public void Init(float cooltime = 0, SkillType skillType = SkillType.Base, float damage = 0f)
+    public void Init(float cooltime = 0)
     {
         if (!TryGetComponent<Animator>(out animator))
             animator = GetComponentInChildren<Animator>();
@@ -54,8 +41,6 @@ public abstract class Skill : MonoBehaviour
         if (cooltime == 0)
             this.cooltime = 1f;
 
-        this.damage = damage;
-
         Castable = true;
 
         if (skill_Level == 0)
@@ -66,7 +51,6 @@ public abstract class Skill : MonoBehaviour
         if (cooltimeBox)
             originColor = cooltimeBox.color;
 
-        this.skill_Type = skillType;
 
         if (auto)
             Cast();

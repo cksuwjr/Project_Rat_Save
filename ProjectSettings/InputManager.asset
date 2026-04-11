@@ -57,8 +57,8 @@ InputManager:
     m_Name: Fire2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: k
+    negativeButton: k
+    positiveButton: left alt
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -74,7 +74,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: l
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -106,7 +106,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: h
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

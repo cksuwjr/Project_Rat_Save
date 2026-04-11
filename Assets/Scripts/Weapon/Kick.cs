@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Kick : Skill
 {
+    public float damage = 70;
+    public int count = 1;
+
     protected override IEnumerator Cast_()
     {
         animator?.SetTrigger("Fire2");
@@ -22,7 +25,7 @@ public class Kick : Skill
             {
                 Entity enemy;
                 col.TryGetComponent<Entity>(out enemy);
-                enemy?.GetDamage(controller, damage, skill_Type, 0.5f, 3);
+                enemy?.GetDamage(controller, damage, 0.5f, 3);
             }
         }
         yield return YieldInstructionCache.WaitForSeconds(0.35f);

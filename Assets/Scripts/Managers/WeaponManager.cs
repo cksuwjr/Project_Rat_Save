@@ -1,16 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
-public enum WeaponType
-{
-    Hand,
-    Wood_Carving,
-}
 
 public class WeaponManager : MonoBehaviour
 {
-    private WeaponType weaponType = 0;
-    public Transform hand;
-
     private bool fire1;
     private bool fire2;
     private bool fire3;
@@ -32,50 +27,21 @@ public class WeaponManager : MonoBehaviour
 
     public void Init()
     {
-        ChangeWeapon(WeaponType.Hand);
-    }
+        //
+        skill1 = gameObject.AddComponent<Punch>();
+        skill2 = gameObject.AddComponent<Kick>();
+        
+        
 
-    public void ChangeWeapon(WeaponType weapon)
-    {
-        if (skill1) Destroy(skill1);
-        if (skill2) Destroy(skill2);
-        if (skill3) Destroy(skill3);
-        if (skill4) Destroy(skill4);
-        // if (skill5) Destroy(skill5); // change weapon during Destroy have Trouble
+        
+        skill1.Init(0.6f);
+        skill1.skill_Level = 1;
 
-        weaponType = weapon;
-
-        switch (weaponType)
-        {
-            case WeaponType.Hand:
-                skill1 = gameObject.AddComponent<Punch>();
-                skill1.Init(0.6f, SkillType.Base, 25f);
-                skill1.skill_Level = 1;
-
-                skill2 = gameObject.AddComponent<Kick>();
-                skill2.Init(1f, SkillType.Base, 70f);
-                skill2.skill_Level = 1;
-
-                break;
-
-            case WeaponType.Wood_Carving:
-                skill1 = gameObject.AddComponent<Punch>();
-                skill1.Init(1f, SkillType.Base, 120f);
-                skill1.skill_Level = 1;
-
-                skill2 = gameObject.AddComponent<Kick>();
-                skill2.Init(1f, SkillType.Base, 70f);
-                skill2.skill_Level = 1;
-
-                break;
-        }
-
-        if (!skill5)
-        {
-            skill5 = gameObject.AddComponent<GetWeapon>();
-            skill5.Init(1);
-            skill5.skill_Level = 1;
-        }
+        skill2.Init();
+        skill2.skill_Level = 1;
+        //skill3.Init();
+        //skill4.Init();
+        //skill5.Init();
     }
 
 
@@ -134,7 +100,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Skill1()
     {
-        // Key : J
         skill1.Cast();
 
         Debug.Log("스킬1 사용");
@@ -142,7 +107,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Skill2()
     {
-        // Key : K
         skill2.Cast();
 
         Debug.Log("스킬2 사용");
@@ -150,8 +114,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Skill3()
     {
-        // Key : L
-
         skill3.Cast();
 
         Debug.Log("스킬3 사용");
@@ -166,8 +128,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Skill5()
     {
-        // Key : H
-
         skill5.Cast();
 
         Debug.Log("스킬5 사용");
