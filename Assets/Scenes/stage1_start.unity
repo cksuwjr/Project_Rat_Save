@@ -913,6 +913,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3411744324559623823, guid: c22d2febd290f1f4f88326fed0131de2,
+        type: 3}
+      propertyPath: weaponEquipPos.x
+      value: -0.088
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411744324559623823, guid: c22d2febd290f1f4f88326fed0131de2,
+        type: 3}
+      propertyPath: weaponEquipPos.y
+      value: 0.042
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411744324559623823, guid: c22d2febd290f1f4f88326fed0131de2,
+        type: 3}
+      propertyPath: weaponEquipPos.z
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411744324559623823, guid: c22d2febd290f1f4f88326fed0131de2,
+        type: 3}
+      propertyPath: weaponEquipRot.x
+      value: 0.9164906
+      objectReference: {fileID: 0}
     - target: {fileID: 5394782906695880708, guid: c22d2febd290f1f4f88326fed0131de2,
         type: 3}
       propertyPath: m_Name
@@ -3934,7 +3954,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5.35
   m_Depth: -1
   m_CullingMask:
@@ -16464,8 +16484,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195262680}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.71210986, y: -0.1545362, z: -0.4235196, w: -0.5381908}
-  m_LocalPosition: {x: 3.45, y: 0.25, z: -0.05}
+  m_LocalRotation: {x: 0.71210986, y: -0.15453623, z: -0.42351958, w: -0.5381908}
+  m_LocalPosition: {x: -0.48999998, y: 1, z: 0.18100002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16490,8 +16510,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.19839227, y: 0.20267464, z: 1.3258743}
+  m_Center: {x: -0.015803447, y: -0.039023634, z: 0.61852384}
 --- !u!23 &1195262683
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16555,8 +16575,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  weaponEquipPos: {x: -0.278, y: -0.116, z: -0.197}
-  weaponEquipRot: {x: 243.818, y: 81.927, z: -32.30099}
+  weaponEquipPos: {x: -0.186884, y: 0.1239619, z: 0.0443188}
+  weaponEquipRot: {x: 107.677, y: 251.505, z: -65.88}
   weaponEquipScale: {x: 1, y: 1, z: 1}
   isUse: 0
 --- !u!54 &1195262686
