@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Punch : Skill
 {
-    public float damage = 25;
-    public int count = 1;
-
     protected override IEnumerator Cast_()
     {
         animator?.SetTrigger("Fire1");
@@ -33,7 +30,7 @@ public class Punch : Skill
             }
         }
 
-        enemy?.GetDamage(controller, damage, 0.5f, 2);
+        enemy?.GetDamage(controller, damage, skill_Type, 0.5f, 2);
 
         yield return YieldInstructionCache.WaitForSeconds(0.25f);
 

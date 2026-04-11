@@ -27,12 +27,12 @@ public class PlayerController : Entity
         weaponManager?.Init();
     }
 
-    public override void GetDamage(Entity attacker, float damage, float knockbackTime = 3f, int effectNum = 0)
+    public override void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
     {
         if (!hittable) return;
 
         var prevHp = status.HP;
-        base.GetDamage(this, damage, knockbackTime, effectNum);
+        base.GetDamage(this, damage, skillType, knockbackTime, effectNum);
 
         OnChangeHp?.Invoke(prevHp, status.HP, status.MaxHP);
         StartCoroutine("Invinsible");
