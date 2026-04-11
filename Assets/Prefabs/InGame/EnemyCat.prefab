@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d03f3acb115b45bb557633e587bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 0}
+  hand: {fileID: 6568058953126337294}
   skill1: {fileID: 0}
   skill2: {fileID: 0}
   skill3: {fileID: 0}
