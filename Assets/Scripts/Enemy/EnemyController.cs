@@ -5,6 +5,13 @@ using UnityEngine;
 
 
 
+public enum EnemyType
+{
+    Base,
+    Fire,
+    Electronic,
+}
+
 public enum EnemyState
 {
     Idle,
@@ -29,6 +36,7 @@ public class EnemyController : Entity
 
 
     private EnemyState state;
+    public int enemyType;
 
     private GameObject target;
     private Vector3 direction;
@@ -166,12 +174,16 @@ public class EnemyController : Entity
         ChangeState(EnemyState.Idle);
     }
 
-    public override void GetDamage(Entity attacker, float damage, float knockbackTime = 3f, int effectNum = 0)
+    public override void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
     {
         if (!hittable) return;
 
         var prevHp = status.HP;
-        base.GetDamage(this, damage, knockbackTime, effectNum);
+
+        if ((SkillType)enemyType != SkillType.Base && (SkillType)enemyType == skillType)
+            base.GetDamage(this, damage * 0.05f, skillType, knockbackTime, effectNum);
+        else
+            base.GetDamage(this, damage, skillType, knockbackTime, effectNum);
 
         OnChangeHp?.Invoke(prevHp, status.HP, status.MaxHP);
         StartCoroutine("Invinsible");

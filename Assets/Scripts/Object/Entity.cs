@@ -23,7 +23,7 @@ public class Entity : PoolObject
         isDead = false;
     }
 
-    public virtual void GetDamage(Entity attacker, float damage, float knockbackTime = 3f, int effectNum = 0)
+    public virtual void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
     {
         if (isDead) return;
 
@@ -37,7 +37,6 @@ public class Entity : PoolObject
 
             if (effectNum != 0)
             {
-                Debug.Log("¿Ã∆Â∆Æ πﬂµø");
                 var effect = PoolManager.Instance.GetPool(effectNum).GetPoolObject();
                 effect.transform.position = transform.position;
                 effect.GetComponent<Effect>().Init();
