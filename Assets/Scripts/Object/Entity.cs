@@ -56,4 +56,7 @@ public class Entity : PoolObject
         OnDie?.Invoke();
         ReturnToPool();
     }
+
+    public virtual void StopAct() { }
+    public virtual void StartAct() { }
 }

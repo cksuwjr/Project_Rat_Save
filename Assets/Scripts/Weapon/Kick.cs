@@ -6,6 +6,8 @@ public class Kick : Skill
 {
     protected override IEnumerator Cast_()
     {
+        controller.StopAct();
+
         animator?.SetTrigger("Fire2");
 
         if(weaponManager) weaponManager.attackable = false;
@@ -28,6 +30,8 @@ public class Kick : Skill
         yield return YieldInstructionCache.WaitForSeconds(0.35f);
 
         if (weaponManager) weaponManager.attackable = true;
+
+        controller.StartAct();
 
         yield return null;
     }

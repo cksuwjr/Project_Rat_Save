@@ -9,6 +9,8 @@ public class GetWeapon : Skill
     {
         animator?.SetTrigger("Fire2");
 
+        controller.StopAct();
+
         if (weaponManager) weaponManager.attackable = false;
 
         yield return YieldInstructionCache.WaitForSeconds(0.35f);
@@ -71,6 +73,8 @@ public class GetWeapon : Skill
         yield return YieldInstructionCache.WaitForSeconds(0.35f);
 
         if (weaponManager) weaponManager.attackable = true;
+
+        controller.StartAct();
 
         yield return null;
     }
