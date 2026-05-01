@@ -8,9 +8,13 @@ using static UnityEngine.Rendering.DebugUI;
 public class AttachedCanvas : MonoBehaviour
 {
     private Entity controller;
+    bool isInited = false;
     
     void Start()
     {
+        if (isInited) return;
+        else isInited = true;
+
         controller = GetComponentInParent<Entity>();
 
         var hpPannel = transform.GetChild(0).gameObject;
@@ -18,11 +22,5 @@ public class AttachedCanvas : MonoBehaviour
             controller.OnChangeHp += (prevHp, hp, maxhp) => UIManager.Instance.FillImageAnim(hpBar, prevHp, hp, maxhp);
         if (hpPannel.transform.GetChild(2).TryGetComponent<TextMeshProUGUI>(out var hpText))
             controller.OnChangeHp += (prevHp, hp, maxhp) => hpText.text = $"{hp:F0}";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
