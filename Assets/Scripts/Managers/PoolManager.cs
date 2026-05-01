@@ -6,28 +6,37 @@ public class PoolManager : SingletonDestroy<PoolManager>, IManager
 {
     public Pool damagePool;
 
-    public Pool monsterPool;
-
     public Pool punchEffectPool;
 
     public Pool aoeEffectPool;
 
+    public Pool yellowCatPool;
+
+    public Pool blackCatPool;
+
     public void Init()
     {
-        transform.GetChild(0).TryGetComponent<Pool>(out damagePool);
-        transform.GetChild(1).TryGetComponent<Pool>(out monsterPool);
+        int count = 0;
 
-        transform.GetChild(2).TryGetComponent<Pool>(out punchEffectPool);
-        transform.GetChild(3).TryGetComponent<Pool>(out aoeEffectPool);
+        transform.GetChild(count++).TryGetComponent<Pool>(out damagePool);
+
+        transform.GetChild(count++).TryGetComponent<Pool>(out punchEffectPool);
+        transform.GetChild(count++).TryGetComponent<Pool>(out aoeEffectPool);
+
+        transform.GetChild(count++).TryGetComponent<Pool>(out yellowCatPool);
+        transform.GetChild(count++).TryGetComponent<Pool>(out blackCatPool);
+
 
 
         damagePool?.Init();
 
-        monsterPool?.Init();
-
         punchEffectPool?.Init();
 
         aoeEffectPool?.Init();
+
+        yellowCatPool?.Init();
+
+        blackCatPool?.Init();
     }
 
     public Pool GetPool(int n)
