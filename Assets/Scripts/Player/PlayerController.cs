@@ -22,6 +22,7 @@ public class PlayerController : Entity
 
         TryGetComponent<WeaponManager>(out weaponManager);
         weaponManager?.Init();
+        OnChangeHp?.Invoke(status.HP, status.HP, status.MaxHP);
     }
 
     public override void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
@@ -138,6 +139,8 @@ public class PlayerController : Entity
 
     public override void StartAct() 
     {
+        if (isDead) return;
+
         movement.Movable = true;
     }
 }

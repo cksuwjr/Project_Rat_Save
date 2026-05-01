@@ -209,6 +209,8 @@ public class EnemyController : Entity
         weaponManager?.Init();
 
         ChangeState(EnemyState.Idle);
+
+        OnChangeHp?.Invoke(status.HP, status.HP, status.MaxHP);
     }
 
     public override void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)

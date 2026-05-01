@@ -79,13 +79,65 @@ public class GameManager : Singleton<GameManager>
 
     private void GameStart()
     {
-        var cat1 = GameManager.Instance.poolManager.yellowCatPool.GetPoolObject();
-        cat1.transform.position = new Vector3(2, 0.5f, 7.68f);
-        cat1.GetComponent<Entity>().Init();
+        StartCoroutine("Spawn");
+        
 
 
-        var cat2 = GameManager.Instance.poolManager.blackCatPool.GetPoolObject();
-        cat2.transform.position = new Vector3(-0.15f, 0.5f, 7.68f);
-        cat2.GetComponent<Entity>().Init();
+
+        //var cat1 = GameManager.Instance.poolManager.yellowCatPool.GetPoolObject();
+        //cat1.transform.position = new Vector3(2, 0.5f, 7.68f);
+        //cat1.GetComponent<Entity>().Init();
+
+
+        //var cat2 = GameManager.Instance.poolManager.blackCatPool.GetPoolObject();
+        //cat2.transform.position = new Vector3(-0.15f, 0.5f, 7.68f);
+        //cat2.GetComponent<Entity>().Init();
+    }
+
+    IEnumerator Spawn()
+    {
+        int count;
+        int maxCount;
+
+        count = 0;
+        maxCount = 5;
+        while (count < maxCount)
+        {
+            GameObject spawned;
+
+            spawned = EnemySpawner.GetSpawnerById(0).Spawn(3, WeaponType.Hand);
+            spawned.GetComponent<Entity>().Init();
+
+            spawned = EnemySpawner.GetSpawnerById(1).Spawn(3, WeaponType.Hand);
+            spawned.GetComponent<Entity>().Init();
+
+            spawned = EnemySpawner.GetSpawnerById(2).Spawn(3, WeaponType.Hand);
+            spawned.GetComponent<Entity>().Init();
+
+            yield return YieldInstructionCache.WaitForSeconds(3f);
+            count++;
+        }
+        yield return YieldInstructionCache.WaitForSeconds(10);
+        Debug.Log("다음 스테이지");
+        count = 0;
+        maxCount = 5;
+        while (count < maxCount)
+        {
+            var spawned = EnemySpawner.GetSpawnerById(0).Spawn(4, WeaponType.Wood_Carving);
+            spawned.GetComponent<Entity>().Init();
+
+            spawned = EnemySpawner.GetSpawnerById(1).Spawn(4, WeaponType.Wood_Carving);
+            spawned.GetComponent<Entity>().Init();
+
+            spawned = EnemySpawner.GetSpawnerById(2).Spawn(4, WeaponType.Wood_Carving);
+            spawned.GetComponent<Entity>().Init();
+
+            yield return YieldInstructionCache.WaitForSeconds(3f);
+            count++;
+        }
+        yield return YieldInstructionCache.WaitForSeconds(10);
+
+
+        yield return null;
     }
 }
