@@ -202,8 +202,11 @@ public class EnemyController : Entity
         TryGetComponent<IMove>(out movement);
 
         TryGetComponent<WeaponManager>(out weaponManager);
-        weaponManager?.Init();
+    }
 
+    public override void Init()
+    {
+        weaponManager?.Init();
 
         ChangeState(EnemyState.Idle);
     }

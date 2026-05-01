@@ -71,4 +71,21 @@ public class GameManager : Singleton<GameManager>
         //titleSceneManager?.Init();
         //scenarioManager?.Init();
     }
+
+    private void Start()
+    {
+        GameStart();
+    }
+
+    private void GameStart()
+    {
+        var cat1 = GameManager.Instance.poolManager.yellowCatPool.GetPoolObject();
+        cat1.transform.position = new Vector3(2, 0.5f, 7.68f);
+        cat1.GetComponent<Entity>().Init();
+
+
+        var cat2 = GameManager.Instance.poolManager.blackCatPool.GetPoolObject();
+        cat2.transform.position = new Vector3(-0.15f, 0.5f, 7.68f);
+        cat2.GetComponent<Entity>().Init();
+    }
 }

@@ -23,6 +23,8 @@ public class Entity : PoolObject
         isDead = false;
     }
 
+    public virtual void Init() { }
+
     public virtual void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
     {
         if (isDead) return;
@@ -32,7 +34,10 @@ public class Entity : PoolObject
         var damageText = PoolManager.Instance.damagePool.GetPoolObject();
         if (damageText.TryGetComponent<DamageObject>(out var damageObj))
         {
-            damageObj.transform.position = transform.position + Camera.main.transform.up * 2;
+            var floatPos = transform.position;
+            floatPos.y = 0;
+            floatPos += (Camera.main.transform.up - Camera.main.transform.forward).normalized * 4;
+            damageObj.transform.position = floatPos;
             damageObj.Init(damage);
 
             if (effectNum != 0)
@@ -54,7 +59,7 @@ public class Entity : PoolObject
     {
         isDead = true;
         OnDie?.Invoke();
-        ReturnToPool();
+        Invoke("ReturnToPool", 1.5f);
     }
 
     public virtual void StopAct() { }
