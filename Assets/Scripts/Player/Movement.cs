@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour, IMove
+public class Movement : MonoBehaviour, IMove
 {
     //[SerializeField] private LayerMask wallLayer;
     [SerializeField] private float moveSpeed = 5f; // ±âº»°ª 5
@@ -15,10 +15,13 @@ public class PlayerMove : MonoBehaviour, IMove
 
     private Vector3 finalDir;
 
+    public bool Movable { get; set; }
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         TryGetComponent<Rigidbody>(out rb);
+        Movable = true;
     }
 
     public void SetMoveSpeed(float moveSpeed)

@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -84,20 +84,35 @@ public class EnemyController : Entity
     {
         float timer = 0f;
 
-        SetMoveTarget(GameManager.Instance.Player.transform.position);
+        SetMoveTarget(target.transform.position);
 
         while (target != null)
         {
             timer += Time.deltaTime;
             if (timer > 0.8f)
             {
-                SetMoveTarget(GameManager.Instance.Player.transform.position);
+                SetMoveTarget(target.transform.position);
                 timer = 0f;
             }
+            bool flag = false;
 
-            if (Vector3.Distance(transform.position, GameManager.Instance.Player.transform.position) < 2)
+            if (target.CompareTag("Player") && Vector3.Distance(transform.position, target.transform.position) < 2)
+            {
                 ChangeState(EnemyState.Attack);
-            else
+                flag = true;
+            }
+            
+            if (target.CompareTag("Weapon") && Vector3.Distance(transform.position, target.transform.position) < 1.3f)
+            {
+                weaponManager.Fire(KeyInput.Fire5);
+                movement?.Move(Vector3.zero);
+                yield return YieldInstructionCache.WaitForSeconds(0.7f);
+                target = GameManager.Instance.Player.gameObject;
+                ChangeState(EnemyState.Chase);
+                flag = true;
+            }
+            
+            if(!flag)
                 movement?.Move(direction);
             yield return null;
         }
@@ -126,12 +141,31 @@ public class EnemyController : Entity
     {
         if (isDead) return;
 
+        
+        
+        if(other.CompareTag("Weapon") && !weaponManager.hand.GetComponentInChildren<WeaponObject>())
+        {
+            WeaponObject weapon;
+            if (other.TryGetComponent<WeaponObject>(out weapon))
+            {
+                if(!weapon.isUse)
+                {
+                    StopAllCoroutines();
+                    target = other.gameObject;
+                    ChangeState(EnemyState.Chase);
+                    return;
+                }
+            }
+        }
+        
         if (other.CompareTag("Player"))
         {
             StopAllCoroutines();
             target = other.gameObject;
             ChangeState(EnemyState.Chase);
+            return;
         }
+
     }
 
     private void SetMoveTarget(Vector3 newPos)
@@ -195,41 +229,27 @@ public class EnemyController : Entity
         transform.GetComponentInChildren<Animator>().SetTrigger("Die");
         base.Die();
         StopAllCoroutines();
+
+        if (!weaponManager.hand) return;
+
+        WeaponObject treshWeapon = null;
+        foreach (Transform weaponTr in weaponManager.hand.GetComponentInChildren<Transform>())
+        {
+            if (weaponTr.gameObject.CompareTag("Weapon"))
+            {
+                if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
+                {
+                    treshWeapon.transform.SetParent(null);
+                    treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    treshWeapon.isUse = false;
+
+                    treshWeapon.AddComponent<Rigidbody>();
+                    break;
+                }
+            }
+        }
     }
-
-
-    //private void Update()
-    //{
-    //    InputVector = GameManager.Instance.Player.transform.position - transform.position;
-
-    //    InputVector.y = 0;
-    //    InputVector.Normalize();
-
-
-
-    //    if (!isBinded)
-    //    {
-    //        //    if (inputHandle.GetKeyInput(KeyInput.Fire1))
-    //        //        weaponManager.Fire(KeyInput.Fire1);
-    //        //    if (inputHandle.GetKeyInput(KeyInput.Fire2))
-    //        //        weaponManager.Fire(KeyInput.Fire2);
-    //        //    if (inputHandle.GetKeyInput(KeyInput.Fire3))
-    //        //        weaponManager.Fire(KeyInput.Fire3);
-    //        //    if (inputHandle.GetKeyInput(KeyInput.Fire4))
-    //        //        weaponManager.Fire(KeyInput.Fire4);
-    //        //    if (inputHandle.GetKeyInput(KeyInput.Fire5))
-    //        //        weaponManager.Fire(KeyInput.Fire5);
-    //        //}
-    //    }
-    //}
-
-    //private void FixedUpdate()
-    //{
-    //    if (!isBinded)
-    //    {
-    //        movement?.Move(InputVector);
-    //    }
-    //}
 
     public void GetCC(float time)
     {
@@ -243,12 +263,6 @@ public class EnemyController : Entity
         isBinded = false;
     }
 
-    //public void Attack()
-    //{
-
-    //}
-
-
     public void GetHeal(float value)
     {
         var prevHp = status.HP;
@@ -259,7 +273,6 @@ public class EnemyController : Entity
         OnChangeHp?.Invoke(prevHp, status.HP, status.MaxHP);
 
     }
-
 
     private IEnumerator Invinsible()
     {

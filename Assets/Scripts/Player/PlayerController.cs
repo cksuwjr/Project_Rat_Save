@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : Entity
@@ -11,9 +10,7 @@ public class PlayerController : Entity
 
     private bool hittable = true;
 
-    
 
-    private bool isBinded = false;
 
     private Vector3 InputVector;
 
@@ -35,7 +32,7 @@ public class PlayerController : Entity
         base.GetDamage(this, damage, skillType, knockbackTime, effectNum);
 
         OnChangeHp?.Invoke(prevHp, status.HP, status.MaxHP);
-        StartCoroutine("Invinsible");
+        //StartCoroutine("Invinsible");
     }
 
 
@@ -45,6 +42,8 @@ public class PlayerController : Entity
 
         transform.GetComponentInChildren<Animator>().SetTrigger("Die");
         base.Die();
+        movement.Movable = false;
+        StopAllCoroutines();
     }
 
 
@@ -52,7 +51,7 @@ public class PlayerController : Entity
     {
         InputVector = inputHandle.GetInput();
 
-        if (!isBinded)
+        if (movement.Movable)
         {
             if (inputHandle.GetKeyInput(KeyInput.Fire1))
                 weaponManager.Fire(KeyInput.Fire1);
@@ -89,7 +88,7 @@ public class PlayerController : Entity
 
     private void FixedUpdate()
     {
-        if (!isBinded)
+        if (movement.Movable)
         {
             movement?.Move(InputVector);
         }
@@ -102,9 +101,9 @@ public class PlayerController : Entity
 
     public IEnumerator CC(float time)
     {
-        isBinded = true;
+        movement.Movable = false;
         yield return YieldInstructionCache.WaitForSeconds(time);
-        isBinded = false;
+        movement.Movable = true;
     }
 
     public void Attack()
@@ -128,7 +127,17 @@ public class PlayerController : Entity
     private IEnumerator Invinsible()
     {
         hittable = false;
-        yield return YieldInstructionCache.WaitForSeconds(0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(0.7f);
         hittable = true;
+    }
+
+    public override void StopAct() 
+    {
+        movement.Movable = false;
+    }
+
+    public override void StartAct() 
+    {
+        movement.Movable = true;
     }
 }

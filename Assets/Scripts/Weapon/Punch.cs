@@ -5,6 +5,8 @@ public class Punch : Skill
 {
     protected override IEnumerator Cast_()
     {
+        controller.StopAct();
+
         animator?.SetTrigger("Fire1");
         if (weaponManager) weaponManager.attackable = false;
 
@@ -40,6 +42,8 @@ public class Punch : Skill
         yield return YieldInstructionCache.WaitForSeconds(0.25f);
 
         if (weaponManager) weaponManager.attackable = true;
+
+        controller.StartAct();
 
         yield return null;
     }

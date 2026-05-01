@@ -6,6 +6,8 @@ public class RollingRat : Skill
 {
     protected override IEnumerator Cast_()
     {
+        controller.StopAct();
+
         animator?.SetTrigger("Fire3");
 
         if (weaponManager) weaponManager.attackable = false;
@@ -13,12 +15,12 @@ public class RollingRat : Skill
         controller.StartCoroutine("Invinsible");
         yield return YieldInstructionCache.WaitForSeconds(0.15f);
 
-        PlayerMove move;
+        Movement move;
 
         float timer = 0;
         while (timer < 0.28f)
         {
-            if (TryGetComponent<PlayerMove>(out move))
+            if (TryGetComponent<Movement>(out move))
                 move.Rolling(15);
             yield return YieldInstructionCache.waitForFixedUpdate;
             timer += Time.fixedDeltaTime;
@@ -27,6 +29,8 @@ public class RollingRat : Skill
 
 
         if (weaponManager) weaponManager.attackable = true;
+
+        controller.StartAct();
 
         yield return null;
     }

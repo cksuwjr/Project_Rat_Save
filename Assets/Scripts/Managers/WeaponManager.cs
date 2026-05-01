@@ -41,10 +41,10 @@ public class WeaponManager : MonoBehaviour
 
     public void ChangeWeapon(WeaponType weapon)
     {
-        if (skill1) Destroy(skill1);
-        if (skill2) Destroy(skill2);
-        if (skill3) Destroy(skill3);
-        if (skill4) Destroy(skill4);
+        if (skill1) { Destroy(skill1); skill1 = null; }
+        if (skill2) { Destroy(skill2); skill2 = null; }
+        if (skill3) { Destroy(skill3); skill3 = null; }
+        if (skill4) { Destroy(skill4); skill4 = null; }
         // if (skill5) Destroy(skill5); // change weapon during Destroy have Trouble
 
         weaponType = weapon;
@@ -146,7 +146,7 @@ public class WeaponManager : MonoBehaviour
     private void Skill1()
     {
         // Key : J
-        skill1.Cast();
+        skill1?.Cast();
 
         Debug.Log("스킬1 사용");
     }
@@ -154,7 +154,7 @@ public class WeaponManager : MonoBehaviour
     private void Skill2()
     {
         // Key : K
-        skill2.Cast();
+        skill2?.Cast();
 
         Debug.Log("스킬2 사용");
     }
@@ -163,14 +163,14 @@ public class WeaponManager : MonoBehaviour
     {
         // Key : L
 
-        skill3.Cast();
+        skill3?.Cast();
 
         Debug.Log("스킬3 사용");
     }
 
     private void Skill4()
     {
-        skill4.Cast();
+        skill4?.Cast();
 
         Debug.Log("스킬4 사용");
     }
@@ -179,7 +179,7 @@ public class WeaponManager : MonoBehaviour
     {
         // Key : H
 
-        skill5.Cast();
+        skill5?.Cast();
 
         Debug.Log("스킬5 사용");
     }
