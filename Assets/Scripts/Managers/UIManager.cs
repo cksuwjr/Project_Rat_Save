@@ -175,8 +175,8 @@ public class UIManager : SingletonDestroy<UIManager>, IManager
         }
         bar.fillAmount = fillValue / maxValue;
 
-        if (fillValue <= 0)
-            bar.transform.parent.parent.gameObject.SetActive(fillValue > 0);
+        bar.transform.parent.parent.gameObject.SetActive(fillValue > 0);
+
         
     }
 
