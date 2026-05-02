@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-public enum EnemyType
+public enum EnemyElimentalType
 {
     Base,
     Fire,
@@ -18,6 +18,12 @@ public enum EnemyState
     Patrol,
     Chase,
     Attack,
+}
+
+public enum EnemyType
+{
+    OrangeCat,
+    BlackCat,
 }
 
 
@@ -51,7 +57,7 @@ public class EnemyController : Entity
 
     private IEnumerator Idle()
     {
-        movement?.Move(Vector3.zero);
+        movement?.Move(Vector3.zero, status.MoveSpeed);
 
 
         float timer = 0f;
@@ -72,7 +78,7 @@ public class EnemyController : Entity
         float timer = 0f;
         while (timer < 3f)
         {
-            movement?.Move(direction);
+            movement?.Move(direction, status.MoveSpeed);
             yield return null;
             timer += Time.deltaTime;
         }
@@ -105,7 +111,7 @@ public class EnemyController : Entity
             if (target.CompareTag("Weapon") && Vector3.Distance(transform.position, target.transform.position) < 1.3f)
             {
                 weaponManager.Fire(KeyInput.Fire5);
-                movement?.Move(Vector3.zero);
+                movement?.Move(Vector3.zero, status.MoveSpeed);
                 yield return YieldInstructionCache.WaitForSeconds(0.7f);
                 target = GameManager.Instance.Player.gameObject;
                 ChangeState(EnemyState.Chase);
@@ -113,14 +119,14 @@ public class EnemyController : Entity
             }
             
             if(!flag)
-                movement?.Move(direction);
+                movement?.Move(direction, status.MoveSpeed);
             yield return null;
         }
     }
 
     private IEnumerator Attack()
     {
-        movement?.Move(Vector3.zero);
+        movement?.Move(Vector3.zero, status.MoveSpeed);
 
         int num = UnityEngine.Random.Range(1, 3);
 
@@ -202,10 +208,13 @@ public class EnemyController : Entity
         TryGetComponent<IMove>(out movement);
 
         TryGetComponent<WeaponManager>(out weaponManager);
+
     }
 
-    public override void Init()
+    public override void Init(float hp, float speed)
     {
+        base.Init(hp, speed);
+
         weaponManager?.Init();
 
         ChangeState(EnemyState.Idle);

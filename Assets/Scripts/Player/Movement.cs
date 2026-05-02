@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour, IMove
 {
-    //[SerializeField] private LayerMask wallLayer;
-    [SerializeField] private float moveSpeed = 5f; // ±âº»°ª 5
-
     private Animator animator;
     private Rigidbody rb;
 
@@ -24,12 +21,7 @@ public class Movement : MonoBehaviour, IMove
         Movable = true;
     }
 
-    public void SetMoveSpeed(float moveSpeed)
-    {
-        this.moveSpeed = moveSpeed;
-    }
-
-    public void Move(Vector3 direction)
+    public void Move(Vector3 direction, float speed)
     {
         moveDelta.x = direction.x;
         moveDelta.y = 0;
@@ -40,7 +32,7 @@ public class Movement : MonoBehaviour, IMove
         if (direction != Vector3.zero)
         {
             moveDelta.Normalize();
-            moveDelta *= moveSpeed * Time.deltaTime;
+            moveDelta *= speed * Time.deltaTime;
 
             
             rb.MovePosition(rb.position + moveDelta);

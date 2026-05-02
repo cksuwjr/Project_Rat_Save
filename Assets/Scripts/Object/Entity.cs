@@ -8,6 +8,7 @@ public class Entity : PoolObject
 
     public event Action OnDie;
     public Action<float, float, float> OnChangeHp;
+    public Action OnInit;
 
     public LayerMask enemyLayer;
 
@@ -24,7 +25,16 @@ public class Entity : PoolObject
         isDead = false;
     }
 
-    public virtual void Init() { }
+    public virtual void Init(float hp, float speed) 
+    { 
+        status.MaxHP = status.HP = hp;
+
+        status.MoveSpeed = speed;
+
+        isDead = false;
+
+        OnInit?.Invoke();
+    }
 
     public virtual void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
     {

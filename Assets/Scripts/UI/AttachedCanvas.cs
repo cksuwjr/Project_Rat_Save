@@ -9,13 +9,18 @@ public class AttachedCanvas : MonoBehaviour
 {
     private Entity controller;
     bool isInited = false;
-    
-    void Start()
+
+    private void Awake()
+    {
+        controller = GetComponentInParent<Entity>();
+
+        controller.OnInit += InitUI;
+    }
+
+    void InitUI()
     {
         if (isInited) return;
         else isInited = true;
-
-        controller = GetComponentInParent<Entity>();
 
         var hpPannel = transform.GetChild(0).gameObject;
         if (hpPannel.transform.GetChild(1).TryGetComponent<Image>(out var hpBar))

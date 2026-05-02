@@ -17,12 +17,24 @@ public class EnemySpawner : MonoBehaviour
         return null;
     }
 
-    public GameObject Spawn(int spawnId, WeaponType weapon = WeaponType.Hand)
+    public GameObject Spawn(EnemyType spawnType, WeaponType weapon = WeaponType.Hand)
     {
+        var spawnId = 0;
+        switch(spawnType)
+        {
+            case EnemyType.OrangeCat:
+                spawnId = 3;
+                break;
+            case EnemyType.BlackCat:
+                spawnId = 4;
+                break;
+        }
+
         var spawned = PoolManager.Instance.GetPool(spawnId).GetPoolObject();
         var spawnPosition = transform.position;
-        spawnPosition.y = 0.5f;
+        spawnPosition.y = 0f;
         spawned.transform.position = spawnPosition;
+
 
         var hand = spawned.GetComponent<WeaponManager>().hand;
         WeaponObject spawnedWeapon;
