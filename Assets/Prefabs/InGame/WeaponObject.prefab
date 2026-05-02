@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9180414344958112602}
   - component: {fileID: 8916165080276098284}
   - component: {fileID: 6101245037333740005}
+  - component: {fileID: -111529176545021513}
   m_Layer: 3
   m_Name: WeaponObject
   m_TagString: Weapon
@@ -151,3 +152,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &-111529176545021513
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329734830789838451}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.11000001, y: 0.11000001, z: 0.63500005}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.63500005}
+  m_TimeToStationary: 0.5
