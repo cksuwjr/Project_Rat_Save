@@ -37,7 +37,7 @@ public class Punch : Skill
             }
         }
 
-        enemy?.GetDamage(controller, damage, skill_Type, 0.5f, 1);
+        enemy?.GetDamage(controller, damage + status.AttackPower, skill_Type, 0.5f, 1);
 
         yield return YieldInstructionCache.WaitForSeconds(0.25f);
 
