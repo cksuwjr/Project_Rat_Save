@@ -16,6 +16,7 @@ public abstract class Skill : MonoBehaviour
 {
     protected Entity controller;
     protected WeaponManager weaponManager;
+    protected Status status;
 
     public int skill_Level;
     protected SkillType skill_Type;
@@ -50,6 +51,8 @@ public abstract class Skill : MonoBehaviour
             Debug.LogError("해당 대상에 Entity.cs 가 없습니다!");
 
         TryGetComponent<WeaponManager>(out weaponManager);
+
+        TryGetComponent<Status>(out status);
 
         if (cooltime == 0)
             this.cooltime = 1f;

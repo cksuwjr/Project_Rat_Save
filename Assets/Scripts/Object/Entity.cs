@@ -40,8 +40,11 @@ public class Entity : PoolObject
     {
         if (isDead) return;
 
-        status.HP -= damage;
-        
+        var finalDamage = UnityEngine.Random.Range(damage * 0.85f, damage * 1.15f);
+
+        //status.HP -= damage;
+        status.HP -= finalDamage;
+
         var damageText = PoolManager.Instance.damagePool.GetPoolObject();
         if (damageText.TryGetComponent<DamageObject>(out var damageObj))
         {
@@ -49,7 +52,9 @@ public class Entity : PoolObject
             floatPos.y = 0;
             floatPos += (Camera.main.transform.up - Camera.main.transform.forward).normalized * 4;
             damageObj.transform.position = floatPos;
-            damageObj.Init(damage);
+
+            //damageObj.Init(damage);
+            damageObj.Init(finalDamage);
 
             if (effectNum != 0)
             {
@@ -69,6 +74,7 @@ public class Entity : PoolObject
     protected virtual void Die()
     {
         isDead = true;
+
         OnDie?.Invoke();
         Invoke("ReturnToPool", 1.5f);
     }

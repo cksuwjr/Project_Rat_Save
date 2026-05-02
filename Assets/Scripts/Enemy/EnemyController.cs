@@ -48,6 +48,8 @@ public class EnemyController1 : Entity
 
     NavMeshAgent nmAgent;
 
+    CapsuleCollider capCollider;
+
     private void Start()
     {
         ChangeState(EnemyState.Idle);
@@ -114,8 +116,6 @@ public class EnemyController1 : Entity
     {
         float timer = 0f;
         Animator animator = GetComponentInChildren<Animator>();
-        //SetMoveTarget(target.transform.position);
-        Debug.Log("추격중이니?");
         while (target != null)
         {
             timer += Time.deltaTime;
@@ -238,6 +238,8 @@ public class EnemyController1 : Entity
         TryGetComponent<WeaponManager>(out weaponManager);
 
         TryGetComponent<NavMeshAgent>(out nmAgent);
+
+        TryGetComponent<CapsuleCollider>(out capCollider);
     }
 
     public override void Init(float hp, float speed)
@@ -246,9 +248,18 @@ public class EnemyController1 : Entity
 
         weaponManager?.Init();
 
+
+        
+        nmAgent.enabled = true;
+        nmAgent.isStopped = false;
+        nmAgent.ResetPath();
+
+        capCollider.enabled = true;
+
         ChangeState(EnemyState.Idle);
 
         OnChangeHp?.Invoke(status.HP, status.HP, status.MaxHP);
+
     }
 
     public override void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
@@ -272,6 +283,8 @@ public class EnemyController1 : Entity
         transform.GetComponentInChildren<Animator>().SetTrigger("Die");
         base.Die();
         StopAllCoroutines();
+        if(TryGetComponent<Rigidbody>(out var rig))
+            rig.velocity = Vector3.zero;
 
         if (!weaponManager.hand) return;
 
@@ -292,6 +305,14 @@ public class EnemyController1 : Entity
                 }
             }
         }
+
+        capCollider.enabled = false;
+
+        nmAgent.ResetPath();
+        nmAgent.isStopped = true;
+        nmAgent.enabled = false;
+
+        
     }
 
     public void GetCC(float time)
