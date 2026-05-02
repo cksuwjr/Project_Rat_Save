@@ -79,6 +79,8 @@ public class GameManager : Singleton<GameManager>
 
     private void GameStart()
     {
+        GameManager.Instance.player.GetComponent<Entity>().Init(10000, 5);
+
         StartCoroutine("Spawn");
         
 
@@ -96,46 +98,50 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator Spawn()
     {
-        int count;
-        int maxCount;
+        List<Entity> spawnedEntities = new List<Entity>();
 
-        count = 0;
-        maxCount = 5;
-        while (count < maxCount)
+
+        List<StageData> stageData = StageDataManager.Instance.stageDatas;
+
+        GameObject spawned;
+
+        for (int i = 0; i < stageData.Count; i++)
         {
-            GameObject spawned;
+            Debug.Log("Stage - " + (i + 1));
 
-            spawned = EnemySpawner.GetSpawnerById(0).Spawn(3, WeaponType.Hand);
-            spawned.GetComponent<Entity>().Init();
+            for (int j = 0; j < stageData[i].spawnDatas.Count; j++)
+            {
+                var spawnData = stageData[i].spawnDatas[j];
 
-            spawned = EnemySpawner.GetSpawnerById(1).Spawn(3, WeaponType.Hand);
-            spawned.GetComponent<Entity>().Init();
+                for (int k = 0; k < spawnData.spawnCount; k++)
+                {
+                    spawned = EnemySpawner.GetSpawnerById(spawnData.spawnerID)?.Spawn(spawnData.spawnType, spawnData.weaponType);
+                    spawned?.GetComponent<Entity>().Init(spawnData.hp, spawnData.speed);
+                    spawnedEntities.Add(spawned?.GetComponent<Entity>());
 
-            spawned = EnemySpawner.GetSpawnerById(2).Spawn(3, WeaponType.Hand);
-            spawned.GetComponent<Entity>().Init();
+                    YieldInstructionCache.WaitForSeconds(spawnData.spawnTerm);
+                }
+            }
 
-            yield return YieldInstructionCache.WaitForSeconds(3f);
-            count++;
+            bool isAllDead = false;
+            while (!isAllDead)
+            {
+                isAllDead = true;
+
+                for (int j = 0; j < spawnedEntities.Count; j++)
+                    if (!spawnedEntities[j].isDead)
+                    {
+                        isAllDead = false;
+                        break;
+                    }
+                yield return null;
+            }
+
+            Debug.Log("Stage - " + (i + 1) + "상점 오픈");
         }
-        yield return YieldInstructionCache.WaitForSeconds(10);
-        Debug.Log("다음 스테이지");
-        count = 0;
-        maxCount = 5;
-        while (count < maxCount)
-        {
-            var spawned = EnemySpawner.GetSpawnerById(0).Spawn(4, WeaponType.Wood_Carving);
-            spawned.GetComponent<Entity>().Init();
 
-            spawned = EnemySpawner.GetSpawnerById(1).Spawn(4, WeaponType.Wood_Carving);
-            spawned.GetComponent<Entity>().Init();
+       
 
-            spawned = EnemySpawner.GetSpawnerById(2).Spawn(4, WeaponType.Wood_Carving);
-            spawned.GetComponent<Entity>().Init();
-
-            yield return YieldInstructionCache.WaitForSeconds(3f);
-            count++;
-        }
-        yield return YieldInstructionCache.WaitForSeconds(10);
 
 
         yield return null;

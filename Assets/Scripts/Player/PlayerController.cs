@@ -21,7 +21,14 @@ public class PlayerController : Entity
         TryGetComponent<IInputHandle>(out inputHandle);
 
         TryGetComponent<WeaponManager>(out weaponManager);
+    }
+
+    public override void Init(float hp, float speed)
+    {
+        base.Init(hp, speed);
+
         weaponManager?.Init();
+
         OnChangeHp?.Invoke(status.HP, status.HP, status.MaxHP);
     }
 
@@ -91,7 +98,7 @@ public class PlayerController : Entity
     {
         if (movement.Movable)
         {
-            movement?.Move(InputVector);
+            movement?.Move(InputVector, status.MoveSpeed);
         }
     }
 

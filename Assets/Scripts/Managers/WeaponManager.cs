@@ -148,7 +148,7 @@ public class WeaponManager : MonoBehaviour
         // Key : J
         skill1?.Cast();
 
-        Debug.Log("스킬1 사용");
+        //Debug.Log("스킬1 사용");
     }
 
     private void Skill2()
@@ -156,7 +156,7 @@ public class WeaponManager : MonoBehaviour
         // Key : K
         skill2?.Cast();
 
-        Debug.Log("스킬2 사용");
+        //Debug.Log("스킬2 사용");
     }
 
     private void Skill3()
@@ -165,14 +165,14 @@ public class WeaponManager : MonoBehaviour
 
         skill3?.Cast();
 
-        Debug.Log("스킬3 사용");
+        //Debug.Log("스킬3 사용");
     }
 
     private void Skill4()
     {
         skill4?.Cast();
 
-        Debug.Log("스킬4 사용");
+        //Debug.Log("스킬4 사용");
     }
 
     private void Skill5()
@@ -181,7 +181,7 @@ public class WeaponManager : MonoBehaviour
 
         skill5?.Cast();
 
-        Debug.Log("스킬5 사용");
+        //Debug.Log("스킬5 사용");
     }
 
     public void AllCoolTimeDecline(float time)
