@@ -2,160 +2,87 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : SingletonDestroy<UIManager>, IManager
 {
     private GameObject canvas;
-    private GameObject playerCanvas;
+
+    private GameObject ui_Shop;
+    private GameObject ui_Chat;
 
     public void Init()
     {
-        canvas = GameObject.Find("Canvas");
-        GameManager.Instance.Player.TryGetComponent<PlayerController>(out var player);
+        canvas = GameObject.Find("UICanvas");
+        //GameManager.Instance.Player.TryGetComponent<PlayerController>(out var player);
+
+        ui_Chat = canvas.transform.GetChild(0).gameObject;
+
+        var chatPanel = ui_Chat.transform.GetChild(0).gameObject;
+        var openShopBtn = chatPanel.transform.GetChild(3).GetComponent<Button>();
+        openShopBtn.onClick.AddListener(UI_Shop_OpenClose);
+
+        var exitBtn = chatPanel.transform.GetChild(4).GetComponent<Button>();
+        exitBtn.onClick.AddListener(UI_Chat_OpenClose);
+
+        var nextBtn = chatPanel.transform.GetChild(5).GetComponent<Button>();
+        nextBtn.onClick.AddListener(() => { UI_Chat_OpenClose(); GameManager.Instance.ReadyToStage(); });
+
+        /////////////////////////
+
+        ui_Shop = canvas.transform.GetChild(1).gameObject;
+
+        var viewPort = ui_Shop.transform.GetChild(0).GetChild(1).GetComponent<ScrollRect>().viewport;
+        var content = viewPort.GetChild(0);
+        var slot = content.GetChild(0).gameObject;
+
+        var slot1 = Instantiate(slot, content);
+        SetSlot(slot1, "공격력 증가");
+
+        var slot2 = Instantiate(slot, content);
+        SetSlot(slot2, "공격속도\n증가");
+
+        var slot3 = Instantiate(slot, content);
+        SetSlot(slot3, "체력 증가");
+
+        var slot4 = Instantiate(slot, content);
+        SetSlot(slot4, "아무거나 1");
+
+        var slot5 = Instantiate(slot, content);
+        SetSlot(slot5, "아무거나 2");
+
+
+        var exitShopBtn = ui_Shop.transform.GetChild(0).GetChild(2).GetComponent<Button>();
+        exitShopBtn.onClick.AddListener(() => { ui_Shop.SetActive(false); ui_Chat.SetActive(true); });
+
     }
 
-/*
-    public void SkillSelect()
+    public void SetSlot(GameObject slot, string itemText = "", Sprite itemSprite = null, UnityAction btnEvent = null)
     {
-        TimeManager.Instance.Stop();
+        slot.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = itemText;
+        if(itemSprite != null) slot.transform.GetChild(1).GetComponent<Image>().sprite = itemSprite;
+        if (btnEvent != null) slot.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(btnEvent);
+        else slot.transform.GetChild(2).GetComponent<Button>().onClick.RemoveAllListeners();
 
-        var wm = GameManager.Instance.Player.GetComponent<WeaponManager>();
-
-        for (int i = 0; i < selectPannel.transform.childCount; i++)
-            selectPannel.transform.GetChild(i).gameObject.SetActive(false);
-
-
-        SkillCard card;
-        GameObject g;
-        Skill skill1;
-        Skill skill2;
-        Skill skill3;
-        Skill skill4;
-        Skill skill5;
-        Button btn;
-
-        skill1 = wm.GetSkillBasic();
-        if (skill1.skill_Level < 5)
-        {
-            g = selectPannel.transform.GetChild(0).gameObject;
-            g.SetActive(true);
-            if (g.TryGetComponent<SkillCard>(out card))
-                card.Init(skill1.skillImage.sprite, skill1.skillName, skill1.inform);
-
-            if (g.TryGetComponent<Button>(out btn))
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() =>
-                {
-                    skill1.Upgrade();
-                    TimeManager.Instance.Resume();
-                    CloseSelectPannel();
-                }
-                );
-            }
-
-        }
-
-        skill2 = wm.GetSkillQ();
-        if (skill2.skill_Level < 5)
-        {
-            g = selectPannel.transform.GetChild(1).gameObject;
-            g.SetActive(true);
-            if (g.TryGetComponent<SkillCard>(out card))
-                card.Init(skill2.skillImage.sprite, skill2.skillName, skill2.inform);
-            if (g.TryGetComponent<Button>(out btn))
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() =>
-                {
-                    skill2.Upgrade();
-                    TimeManager.Instance.Resume();
-                    CloseSelectPannel();
-                }
-                );
-            }
-        }
-
-        skill3 = wm.GetSkillW();
-        if (skill3.skill_Level < 5)
-        {
-            g = selectPannel.transform.GetChild(2).gameObject;
-            g.SetActive(true);
-            if (g.TryGetComponent<SkillCard>(out card))
-                card.Init(skill3.skillImage.sprite, skill3.skillName, skill3.inform);
-            if (g.TryGetComponent<Button>(out btn))
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() =>
-                {
-                    skill3.Upgrade();
-                    TimeManager.Instance.Resume();
-                    CloseSelectPannel();
-                }
-                );
-            }
-        }
-
-        skill4 = wm.GetSkillE();
-        if (skill4.skill_Level < 5)
-        {
-            g = selectPannel.transform.GetChild(3).gameObject;
-            g.SetActive(true);
-            if (g.TryGetComponent<SkillCard>(out card))
-                card.Init(skill4.skillImage.sprite, skill4.skillName, skill4.inform);
-            if (g.TryGetComponent<Button>(out btn))
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() =>
-                {
-                    skill4.Upgrade();
-                    TimeManager.Instance.Resume();
-                    CloseSelectPannel();
-                }
-                );
-            }
-        }
-
-        skill5 = wm.GetSkillR();
-        if (skill5.skill_Level < 5)
-        {
-            g = selectPannel.transform.GetChild(4).gameObject;
-            g.SetActive(true);
-            if (g.TryGetComponent<SkillCard>(out card))
-                card.Init(skill5.skillImage.sprite, skill5.skillName, skill5.inform);
-            if (g.TryGetComponent<Button>(out btn))
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() =>
-                {
-                    skill5.Upgrade();
-                    TimeManager.Instance.Resume();
-                    CloseSelectPannel();
-                }
-                );
-            }
-        }
-
-        if (wm.GetSkillBasic().skill_Level < 5)
-            selectPannel.transform.GetChild(0).gameObject.SetActive(true);
-
-        if (wm.GetSkillQ().skill_Level < 5)
-            selectPannel.transform.GetChild(1).gameObject.SetActive(true);
-
-        if (wm.GetSkillW().skill_Level < 5)
-            selectPannel.transform.GetChild(2).gameObject.SetActive(true);
-
-        if (wm.GetSkillE().skill_Level < 5)
-            selectPannel.transform.GetChild(3).gameObject.SetActive(true);
-
-        if (wm.GetSkillR().skill_Level < 5)
-            selectPannel.transform.GetChild(4).gameObject.SetActive(true);
-
-        selectPannel.SetActive(true);
+        slot.SetActive(true);
     }
-*/
+
+    public void UI_Shop_OpenClose()
+    {
+        if (ui_Chat.activeSelf) UI_Chat_OpenClose();
+
+        ui_Shop.SetActive(!ui_Shop.activeSelf);
+
+    }
+
+    public void UI_Chat_OpenClose()
+    {
+        ui_Chat.SetActive(!ui_Chat.activeSelf);
+    }
+
+    
 
     public void FillImageAnim(Image bar, float nowValue, float fillValue, float maxValue)
     {

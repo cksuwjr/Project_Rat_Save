@@ -13,8 +13,13 @@ public class GameManager : Singleton<GameManager>
     //private TitleSceneManager titleSceneManager;
     //private ScenarioManager scenarioManager;
 
+    public bool isNextStageReady;
+    public GameObject clearNpc;
+
 
     [SerializeField] private GameObject player;
+
+
 
     public GameObject Player
     {
@@ -137,7 +142,13 @@ public class GameManager : Singleton<GameManager>
                 yield return null;
             }
 
-            Debug.Log("Stage - " + (i + 1) + "»óÁ¡ ¿ÀÇÂ");
+            StageClear();
+            
+
+            while (!isNextStageReady)
+            {
+                yield return null;
+            }
         }
 
        
@@ -145,5 +156,24 @@ public class GameManager : Singleton<GameManager>
 
 
         yield return null;
+    }
+
+    public void StageClear()
+    {
+        isNextStageReady = false;
+
+        var npcPos = GameManager.Instance.player.transform.position;
+        npcPos.y = 0;
+        npcPos.z += 1f;
+        clearNpc.transform.position = npcPos;
+        clearNpc.gameObject.SetActive(true);
+    }
+
+    public void ReadyToStage()
+    {
+        isNextStageReady = true;
+
+        clearNpc.gameObject.SetActive(false);
+
     }
 }

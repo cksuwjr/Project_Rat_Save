@@ -76,6 +76,21 @@ public class CameraManager : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetMouseButtonDown(0)) // ÁÂÅ¬¸¯
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if(hit.collider.CompareTag("ShopOwner"))
+                {
+                    Debug.Log("e");
+                    UIManager.Instance.UI_Chat_OpenClose();
+                }
+            }
+        }
     }
 
     private void LateUpdate()
