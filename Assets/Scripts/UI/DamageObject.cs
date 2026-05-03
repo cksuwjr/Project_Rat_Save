@@ -16,6 +16,10 @@ public class DamageObject : PoolObject
     public void Init(float value)
     {
         text.text = $"{value:F0}";
+
+        //Vector3 parentEuler = transform.parent.rotation.eulerAngles;
+        transform.localRotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, 0, 0);
+
         StartCoroutine("MoveUp");
     }
 
