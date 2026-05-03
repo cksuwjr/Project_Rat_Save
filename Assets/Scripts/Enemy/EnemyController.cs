@@ -256,7 +256,7 @@ public class EnemyController1 : Entity
 
         capCollider.enabled = true;
 
-        ChangeState(EnemyState.Idle);
+        ChangeState(EnemyState.Patrol);
 
         OnChangeHp?.Invoke(status.HP, status.HP, status.MaxHP);
 

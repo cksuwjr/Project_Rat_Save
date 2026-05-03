@@ -119,7 +119,7 @@ public class GameManager : Singleton<GameManager>
                     spawned?.GetComponent<Entity>().Init(spawnData.hp, spawnData.speed);
                     spawnedEntities.Add(spawned?.GetComponent<Entity>());
 
-                    YieldInstructionCache.WaitForSeconds(spawnData.spawnTerm);
+                    yield return YieldInstructionCache.WaitForSeconds(spawnData.spawnTerm);
                 }
             }
 

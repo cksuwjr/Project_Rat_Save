@@ -14,14 +14,12 @@ public class CameraManager : MonoBehaviour
         {
             cam1.gameObject.SetActive(true);
             cam2.gameObject.SetActive(false);
-            cam1 = Camera.main;
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
             cam2.gameObject.SetActive(true);
             cam1.gameObject.SetActive(false);
-            cam2 = Camera.main;
         }
     }
 }
