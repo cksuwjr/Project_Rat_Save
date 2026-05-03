@@ -13,6 +13,7 @@ public class PlayerController : Entity
 
 
     private Vector3 InputVector;
+    private Vector3 Input3DVector;
 
 
     protected override void DoAwake()
@@ -59,6 +60,13 @@ public class PlayerController : Entity
     {
         InputVector = inputHandle.GetInput();
 
+        var camForward = Camera.main.transform.forward;
+        camForward.y = 0f;
+        var camRight = Camera.main.transform.right;
+        camRight.y = 0f;
+
+        Input3DVector = InputVector.z * camForward + InputVector.x * camRight;
+
         if (movement.Movable)
         {
             if (inputHandle.GetKeyInput(KeyInput.Fire1))
@@ -78,7 +86,10 @@ public class PlayerController : Entity
     {
         if (movement.Movable)
         {
-            movement?.Move(InputVector, status.MoveSpeed);
+            if(CameraManager.cameraMode != CameraMode.CAM3)
+                movement?.Move(InputVector, status.MoveSpeed);
+            else
+                movement?.Move(Input3DVector, status.MoveSpeed);
         }
     }
 
