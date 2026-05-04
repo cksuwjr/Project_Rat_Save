@@ -188,6 +188,53 @@ MonoBehaviour:
   poolObject: {fileID: 8646851142185007293, guid: 2e2e7f27e4b1d4c4786c5823d6a40294,
     type: 3}
   poolCount: 5
+--- !u!1 &6211483179520972718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2724559524915838102}
+  - component: {fileID: 1622109312919257738}
+  m_Layer: 0
+  m_Name: ArrowPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2724559524915838102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211483179520972718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8318517223688747574}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1622109312919257738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211483179520972718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13389d841cd561543b739f4a9c8bc6a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 4099426449138443318, guid: 21ff309bd198b41499c2a945dddd1778,
+    type: 3}
+  poolCount: 10
 --- !u!1 &8080676930481323746
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +387,7 @@ Transform:
   - {fileID: 3760108152384340964}
   - {fileID: 597565636536707936}
   - {fileID: 747554868794109159}
+  - {fileID: 2724559524915838102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7532407321974450496
@@ -359,3 +407,4 @@ MonoBehaviour:
   aoeEffectPool: {fileID: 0}
   yellowCatPool: {fileID: 0}
   blackCatPool: {fileID: 0}
+  arrowPool: {fileID: 0}
