@@ -50,6 +50,8 @@ public class EnemyController1 : Entity
 
     CapsuleCollider capCollider;
 
+    public override Vector3 GetDirection { get { return InputVector; } }
+
     private void Start()
     {
         ChangeState(EnemyState.Idle);
@@ -202,6 +204,7 @@ public class EnemyController1 : Entity
 
     private void SetMoveTarget(Vector3 newPos)
     {
+        if(isDead) return;
         //var origin = direction;
         //direction = newPos - transform.position;
         //direction.y = 0;
@@ -275,6 +278,10 @@ public class EnemyController1 : Entity
 
         OnChangeHp?.Invoke(prevHp, status.HP, status.MaxHP);
         StartCoroutine("Invinsible");
+
+        StopAllCoroutines();
+        target = attacker.gameObject;
+        ChangeState(EnemyState.Chase);
     }
 
 

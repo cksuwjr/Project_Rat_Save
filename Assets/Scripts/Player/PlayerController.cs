@@ -15,6 +15,10 @@ public class PlayerController : Entity
     private Vector3 InputVector;
     private Vector3 Input3DVector;
 
+    private Vector3 finalDirection;
+
+    public override Vector3 GetDirection { get {  return finalDirection; } }
+    
 
     protected override void DoAwake()
     {
@@ -60,12 +64,33 @@ public class PlayerController : Entity
     {
         InputVector = inputHandle.GetInput();
 
+
+        
+
+
         var camForward = Camera.main.transform.forward;
         camForward.y = 0f;
         var camRight = Camera.main.transform.right;
         camRight.y = 0f;
 
         Input3DVector = InputVector.z * camForward + InputVector.x * camRight;
+
+
+
+
+        if (CameraManager.cameraMode != CameraMode.CAM3)
+        {
+            if (InputVector != Vector3.zero)
+                finalDirection = InputVector.normalized;
+        }
+        else
+        {
+            if (Input3DVector != Vector3.zero)
+                finalDirection = Input3DVector.normalized;
+        }
+
+
+
 
         if (movement.Movable)
         {

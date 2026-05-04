@@ -14,6 +14,8 @@ public class Entity : PoolObject
 
     public bool isDead = false;
 
+    public virtual Vector3 GetDirection { get; }
+
     private void Awake()
     {
         TryGetComponent<Status>(out status);

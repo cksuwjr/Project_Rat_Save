@@ -4,6 +4,7 @@ public enum WeaponType
 {
     Hand,
     Wood_Carving,
+    Bow,
 }
 
 public class WeaponManager : MonoBehaviour
@@ -69,6 +70,17 @@ public class WeaponManager : MonoBehaviour
 
                 skill2 = gameObject.AddComponent<Kick>();
                 skill2.Init(1f, SkillType.Base, 70f);
+                skill2.skill_Level = 1;
+
+                break;
+
+            case WeaponType.Bow:
+                skill1 = gameObject.AddComponent<ShootArrow>();
+                skill1.Init(0.2f, SkillType.Base, 35f);
+                skill1.skill_Level = 1;
+
+                skill2 = gameObject.AddComponent<RollingShoot>();
+                skill2.Init(1f, SkillType.Base, 35f);
                 skill2.skill_Level = 1;
 
                 break;
