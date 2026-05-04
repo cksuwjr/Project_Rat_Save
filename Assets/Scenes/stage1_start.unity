@@ -7270,7 +7270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 486, y: 64}
+  m_AnchoredPosition: {x: 457, y: 64}
   m_SizeDelta: {x: 572.8, y: 643.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &526285292
@@ -7293,9 +7293,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8c4d801913364e34a9cce7b4d2a81b51, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3f27757598008624f87e9cecef7ada57, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -29505,6 +29505,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3761602863684952842, guid: 6b2e59e8beb34e14c94c452dbfcafdfc,
+        type: 3}
+      propertyPath: bgmVolume
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5565399901367182320, guid: 6b2e59e8beb34e14c94c452dbfcafdfc,
         type: 3}
       propertyPath: m_Name
