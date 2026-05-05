@@ -89,6 +89,7 @@ public class SoundManager : Singleton<SoundManager>, IManager
         {
             BGMAudioObject = PlaySound(audioClip, true);
             BGMAudioObject.AudioSource.loop = true;
+            BGMAudioObject.AudioSource.volume = bgmVolume;
             BGMAudioObject.AudioSource.pitch = 1f;
             BGMAudioObject.name = "BGM Object";
 
@@ -166,8 +167,8 @@ public class SoundManager : Singleton<SoundManager>, IManager
 
     public void GetSoundValue()
     {
-        bgmVolume = PlayerPrefs.GetFloat("bgmVolume", 1);
-        sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 1);
+        bgmVolume = PlayerPrefs.GetFloat("bgmVolume", bgmVolume);
+        sfxVolume = PlayerPrefs.GetFloat("sfxVolume", sfxVolume);
     }
 
     public void SaveSoundValue()
