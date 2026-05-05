@@ -24,10 +24,7 @@ public class UIManager : SingletonDestroy<UIManager>, IManager
         var openShopBtn = chatPanel.transform.GetChild(3).GetComponent<Button>();
         openShopBtn.onClick.AddListener(UI_Shop_OpenClose);
 
-        var exitBtn = chatPanel.transform.GetChild(4).GetComponent<Button>();
-        exitBtn.onClick.AddListener(UI_Chat_OpenClose);
-
-        var nextBtn = chatPanel.transform.GetChild(5).GetComponent<Button>();
+        var nextBtn = chatPanel.transform.GetChild(4).GetComponent<Button>();
         nextBtn.onClick.AddListener(() => { UI_Chat_OpenClose(); GameManager.Instance.ReadyToStage(); });
 
         /////////////////////////
