@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -83,4 +84,42 @@ public class Entity : PoolObject
 
     public virtual void StopAct() { }
     public virtual void StartAct() { }
+
+    public virtual List<Entity> GetNearEnemys(float range)
+    {
+        Collider[] cols = Physics.OverlapSphere(transform.position, range);
+
+        List<Entity> enemys = new List<Entity>();
+
+        foreach (Collider col in cols)
+        {
+            if (col.isTrigger) continue;
+
+            if ((enemyLayer & (1 << col.gameObject.layer)) != 0)
+            {
+                var enemy = col.GetComponent<Entity>();
+
+                if (enemy)
+                    if (enemy.isDead) continue;
+                    else enemys.Add(enemy);
+
+            }
+        }
+
+        // 가장 가까운 순서 정렬
+        enemys.Sort((a, b) =>
+            Vector3.Distance(a.transform.position, transform.position)
+            .CompareTo(
+            Vector3.Distance(b.transform.position, transform.position)
+            ));
+        
+        return enemys;
+    }
+
+    public Entity GetNearEnemy(float range)
+    {
+        var enemys = GetNearEnemys(range);
+        
+        return (enemys.Count > 0) ? enemys[0] : null;
+    }
 }

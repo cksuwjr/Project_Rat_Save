@@ -8,15 +8,33 @@ public class ShootArrow : Skill
     {
         controller.StopAct();
 
-        animator?.SetTrigger("Fire1");
+        animator?.SetBool("Move", false);
+
         if (weaponManager) weaponManager.attackable = false;
 
-        yield return YieldInstructionCache.WaitForSeconds(0.1f);
+        float aimingTime = 0.15f;
+        float timer = 0f;
 
+        var move = GetComponent<Movement>();
+
+        while(Input.GetButton(skill_key.ToString()))
+        {
+            if (timer < aimingTime)
+                timer += Time.deltaTime;
+            else
+            {
+                var entity = controller.GetNearEnemy(10);
+                if(entity) move.See(entity);
+            }
+            yield return null;
+        }
+
+        animator?.SetTrigger("Fire1");
 
         var arrow = PoolManager.Instance.arrowPool.GetPoolObject();
 
         arrow.transform.position = weaponManager.hand.transform.position;
+
         arrow.GetComponent<Projectile>().Init(controller, controller.GetDirection, damage + status.AttackPower * 0.3f, 22f);
 
         yield return YieldInstructionCache.WaitForSeconds(0.1f);

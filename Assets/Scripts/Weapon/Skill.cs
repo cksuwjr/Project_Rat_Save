@@ -20,6 +20,7 @@ public abstract class Skill : MonoBehaviour
 
     public int skill_Level;
     protected SkillType skill_Type;
+    public KeyInput skill_key;
 
     [SerializeField] protected float cooltime;
     protected float ReusableWaitTime;
@@ -42,7 +43,7 @@ public abstract class Skill : MonoBehaviour
 
     
 
-    public void Init(float cooltime = 0, SkillType skillType = SkillType.Base, float damage = 0f)
+    public void Init(KeyInput skillKey, float cooltime = 0, SkillType skillType = SkillType.Base, float damage = 0f)
     {
         if (!TryGetComponent<Animator>(out animator))
             animator = GetComponentInChildren<Animator>();
@@ -53,6 +54,8 @@ public abstract class Skill : MonoBehaviour
         TryGetComponent<WeaponManager>(out weaponManager);
 
         TryGetComponent<Status>(out status);
+
+        skill_key = skillKey;
 
         if (cooltime == 0)
             this.cooltime = 1f;

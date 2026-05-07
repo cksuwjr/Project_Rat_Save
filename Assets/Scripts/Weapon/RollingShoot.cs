@@ -8,14 +8,31 @@ public class RollingShoot : Skill
     {
         controller.StopAct();
 
-        animator?.SetTrigger("Fire3");
+        
         if (weaponManager) weaponManager.attackable = false;
 
-        yield return YieldInstructionCache.WaitForSeconds(0.1f);
+        animator?.SetBool("Move", false);
 
-        Movement move;
+        float aimingTime = 0.15f;
+        float timer = 0f;
 
-        float timer = 0;
+        var move = GetComponent<Movement>();
+
+        while (Input.GetButton(skill_key.ToString()))
+        {
+            if (timer < aimingTime)
+                timer += Time.deltaTime;
+            else
+            {
+                var entity = controller.GetNearEnemy(10);
+                if (entity) move.See(entity);
+            }
+            yield return null;
+        }
+
+        animator?.SetTrigger("Fire3");
+
+        timer = 0;
         while (timer < 0.14f)
         {
             if (TryGetComponent<Movement>(out move))

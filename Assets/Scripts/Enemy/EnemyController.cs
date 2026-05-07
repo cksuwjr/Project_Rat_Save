@@ -27,7 +27,7 @@ public enum EnemyType
 }
 
 
-public class EnemyController1 : Entity
+public class EnemyController : Entity
 {
     private IMove movement;
     private WeaponManager weaponManager;

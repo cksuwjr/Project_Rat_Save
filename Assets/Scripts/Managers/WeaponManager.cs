@@ -12,17 +12,9 @@ public class WeaponManager : MonoBehaviour
     private WeaponType weaponType = 0;
     public Transform hand;
 
-    private bool fire1;
-    private bool fire2;
-    private bool fire3;
-    private bool fire4;
-    private bool fire5;
+    private bool[] fire = new bool[5] { false, false, false, false, false };
 
-    [SerializeField] private Skill skill1;
-    [SerializeField] private Skill skill2;
-    [SerializeField] private Skill skill3;
-    [SerializeField] private Skill skill4;
-    [SerializeField] private Skill skill5;
+    [SerializeField] private Skill[] skills = new Skill[5] {null, null, null, null, null};
 
     public bool attackable = true;
 
@@ -42,63 +34,67 @@ public class WeaponManager : MonoBehaviour
 
     public void ChangeWeapon(WeaponType weapon)
     {
-        if (skill1) { Destroy(skill1); skill1 = null; }
-        if (skill2) { Destroy(skill2); skill2 = null; }
-        if (skill3) { Destroy(skill3); skill3 = null; }
-        if (skill4) { Destroy(skill4); skill4 = null; }
-        // if (skill5) Destroy(skill5); // change weapon during Destroy have Trouble
+        if (skills[0]) { Destroy(skills[0]); skills[0] = null; }
 
         weaponType = weapon;
 
         switch (weaponType)
         {
             case WeaponType.Hand:
-                skill1 = gameObject.AddComponent<Punch>();
-                skill1.Init(0.6f, SkillType.Base, 25f);
-                skill1.skill_Level = 1;
+                skills[0] = gameObject.AddComponent<Punch>();
+                skills[0].Init(KeyInput.Fire1, 0.6f, SkillType.Base, 25f);
+                skills[0].skill_Level = 1;
 
-                skill2 = gameObject.AddComponent<Kick>();
-                skill2.Init(1f, SkillType.Base, 70f);
-                skill2.skill_Level = 1;
+                skills[1] = gameObject.AddComponent<Kick>();
+                skills[1].Init(KeyInput.Fire2, 0.6f, SkillType.Base, 70f);
+                skills[1].skill_Level = 1;
 
                 break;
 
             case WeaponType.Wood_Carving:
-                skill1 = gameObject.AddComponent<Punch>();
-                skill1.Init(1f, SkillType.Base, 120f);
-                skill1.skill_Level = 1;
+                skills[0] = gameObject.AddComponent<Punch>();
+                skills[0].Init(KeyInput.Fire1, 1f, SkillType.Base, 120f);
+                skills[0].skill_Level = 1;
 
-                skill2 = gameObject.AddComponent<Kick>();
-                skill2.Init(1f, SkillType.Base, 70f);
-                skill2.skill_Level = 1;
+                skills[1] = gameObject.AddComponent<Kick>();
+                skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 70f);
+                skills[1].skill_Level = 1;
 
                 break;
 
             case WeaponType.Bow:
-                skill1 = gameObject.AddComponent<ShootArrow>();
-                skill1.Init(0.2f, SkillType.Base, 35f);
-                skill1.skill_Level = 1;
+                skills[0] = gameObject.AddComponent<ShootArrow>();
+                skills[0].Init(KeyInput.Fire1, 0.2f, SkillType.Base, 35f);
+                skills[0].skill_Level = 1;
 
-                skill2 = gameObject.AddComponent<RollingShoot>();
-                skill2.Init(1f, SkillType.Base, 35f);
-                skill2.skill_Level = 1;
+                skills[1] = gameObject.AddComponent<RollingShoot>();
+                skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 35f);
+                skills[1].skill_Level = 1;
 
                 break;
         }
 
-        if (!skill3)
+        if (!skills[2])
         {
-            skill3 = gameObject.AddComponent<RollingRat>();
-            skill3.Init(1);
-            skill3.skill_Level = 1;
+            skills[2] = gameObject.AddComponent<RollingRat>();
+            skills[2].Init(KeyInput.Fire3, 1);
+            skills[2].skill_Level = 1;
         }
 
-        if (!skill5)
+        if (!skills[4])
         {
-            skill5 = gameObject.AddComponent<GetWeapon>();
-            skill5.Init(1);
-            skill5.skill_Level = 1;
+            skills[4] = gameObject.AddComponent<GetWeapon>();
+            skills[4].Init(KeyInput.Fire5, 1);
+            skills[4].skill_Level = 1;
         }
+
+        //skill1 = gameObject.AddComponent<Punch>();
+        //skill1.Init(KeyInput.Fire1, 0.6f, SkillType.Base, 25f);
+        //skill1.skill_Level = 1;
+
+        //skill2 = gameObject.AddComponent<Kick>();
+        //skill2.Init(KeyInput.Fire2, 1f, SkillType.Base, 70f);
+        //skill2.skill_Level = 1;
     }
 
 
@@ -106,11 +102,11 @@ public class WeaponManager : MonoBehaviour
     {
         switch (input)
         {
-            case KeyInput.Fire1: fire1 = true; break;
-            case KeyInput.Fire2: fire2 = true; break;
-            case KeyInput.Fire3: fire3 = true; break;
-            case KeyInput.Fire4: fire4 = true; break;
-            case KeyInput.Fire5: fire5 = true; break;
+            case KeyInput.Fire1: fire[0] = true; break;
+            case KeyInput.Fire2: fire[1] = true; break;
+            case KeyInput.Fire3: fire[2] = true; break;
+            case KeyInput.Fire4: fire[3] = true; break;
+            case KeyInput.Fire5: fire[4] = true; break;
         }
     }
 
@@ -118,110 +114,28 @@ public class WeaponManager : MonoBehaviour
     {
         if (!attackable)
         {
-            fire1 = false;
-            fire2 = false;
-            fire3 = false;
-            fire4 = false;
-            fire5 = false;
+            fire[0] = false;
+            fire[1] = false;
+            fire[2] = false;
+            fire[3] = false;
+            fire[4] = false;
             return;
         }
             
 
-        if (fire1)
+        for(int i = 0; i < fire.Length; i++)
         {
-            Skill1();
-            fire1 = false;
+            if (fire[i])
+            {
+                skills[i]?.Cast();
+                fire[i] = false;
+            }
         }
-        if (fire2)
-        {
-            Skill2();
-            fire2 = false;
-        }
-        if (fire3)
-        {
-            Skill3();
-            fire3 = false;
-        }
-        if (fire4)
-        {
-            Skill4();
-            fire4 = false;
-        }
-
-        if (fire5)
-        {
-            Skill5();
-            fire5 = false;
-        }
-    }
-
-    private void Skill1()
-    {
-        // Key : J
-        skill1?.Cast();
-
-        //Debug.Log("스킬1 사용");
-    }
-
-    private void Skill2()
-    {
-        // Key : K
-        skill2?.Cast();
-
-        //Debug.Log("스킬2 사용");
-    }
-
-    private void Skill3()
-    {
-        // Key : L
-
-        skill3?.Cast();
-
-        //Debug.Log("스킬3 사용");
-    }
-
-    private void Skill4()
-    {
-        skill4?.Cast();
-
-        //Debug.Log("스킬4 사용");
-    }
-
-    private void Skill5()
-    {
-        // Key : H
-
-        skill5?.Cast();
-
-        //Debug.Log("스킬5 사용");
     }
 
     public void AllCoolTimeDecline(float time)
     {
-        skill1.CooltimeDecline(time);
-        skill2.CooltimeDecline(time);
-        skill3.CooltimeDecline(time);
-        skill4.CooltimeDecline(time);
-    }
-
-    public Skill GetSkillQ()
-    {
-        return skill1;
-    }
-    public Skill GetSkillW()
-    {
-        return skill2;
-    }
-    public Skill GetSkillE()
-    {
-        return skill3;
-    }
-    public Skill GetSkillR()
-    {
-        return skill4;
-    }
-    public Skill GetSkillT()
-    {
-        return skill5;
+        for (int i = 0; i < skills.Length; i++)
+            skills[i].CooltimeDecline(time);
     }
 }
