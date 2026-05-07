@@ -14,10 +14,7 @@ public class PlayerController : Entity
 
     private Vector3 InputVector;
     private Vector3 Input3DVector;
-
-    private Vector3 finalDirection;
-
-    public override Vector3 GetDirection { get {  return finalDirection; } }
+    public override Vector3 GetDirection { get {  return movement.Direction; } }
     
 
     protected override void DoAwake()
@@ -78,16 +75,10 @@ public class PlayerController : Entity
 
 
 
-        if (CameraManager.cameraMode != CameraMode.CAM3)
-        {
-            if (InputVector != Vector3.zero)
-                finalDirection = InputVector.normalized;
-        }
-        else
-        {
-            if (Input3DVector != Vector3.zero)
-                finalDirection = Input3DVector.normalized;
-        }
+        //if (CameraManager.cameraMode != CameraMode.CAM3)
+        //    finalDirection = InputVector.normalized;
+        //else
+        //    finalDirection = Input3DVector.normalized;
 
 
 
@@ -109,13 +100,10 @@ public class PlayerController : Entity
 
     private void FixedUpdate()
     {
-        if (movement.Movable)
-        {
-            if(CameraManager.cameraMode != CameraMode.CAM3)
-                movement?.Move(InputVector, status.MoveSpeed);
-            else
-                movement?.Move(Input3DVector, status.MoveSpeed);
-        }
+        if (CameraManager.cameraMode != CameraMode.CAM3)
+            movement?.Move(InputVector.normalized, status.MoveSpeed);
+        else
+            movement?.Move(Input3DVector.normalized, status.MoveSpeed);
     }
 
     public void GetCC(float time)
