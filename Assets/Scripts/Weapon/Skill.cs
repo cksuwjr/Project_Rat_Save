@@ -25,6 +25,7 @@ public abstract class Skill : MonoBehaviour
     [SerializeField] protected float cooltime;
     protected float ReusableWaitTime;
     protected bool Castable;
+
     protected bool auto = false;
     protected Animator animator;
 
@@ -59,6 +60,8 @@ public abstract class Skill : MonoBehaviour
 
         if (cooltime == 0)
             this.cooltime = 1f;
+        else
+            this.cooltime = cooltime;
 
         this.damage = damage;
 
@@ -91,12 +94,13 @@ public abstract class Skill : MonoBehaviour
         }
         else
         {
-            Debug.Log("해당 스킬은 재사용대기시간 중 입니다!");
+            //Debug.Log("해당 스킬은 재사용대기시간 중 입니다!");
             return false;
         }
     }
     public void StopCast()
     {
+        Castable = false;
         StopCoroutine("Cast_");
     }
     protected abstract IEnumerator Cast_();
