@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour, IMove
         rb.MovePosition(rb.position + moveDelta);
     }
 
-    public void See(Entity entity)
+    public void See(Entity entity, float speed = 1500f)
     {
         var lookRot = entity.transform.position - transform.position;
         lookRot.y = 0;
@@ -76,7 +76,7 @@ public class Movement : MonoBehaviour, IMove
         Quaternion newRotation = Quaternion.RotateTowards(
             rb.rotation,
             targetRotation,
-            1500f * Time.deltaTime
+            speed * Time.deltaTime
         );
 
         rb.MoveRotation(newRotation);

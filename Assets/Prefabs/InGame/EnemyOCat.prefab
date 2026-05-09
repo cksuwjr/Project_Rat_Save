@@ -266,11 +266,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 3047480658160221789}
-  skill1: {fileID: 0}
-  skill2: {fileID: 0}
-  skill3: {fileID: 0}
-  skill4: {fileID: 0}
-  skill5: {fileID: 0}
+  weaponRange: 0
+  skills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   attackable: 1
 --- !u!114 &6917226445965044212
 MonoBehaviour:
@@ -937,7 +939,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: dfbb4243b52e6464bbc81f3fc181eec3, type: 2}
+      objectReference: {fileID: 22100000, guid: ab2e736e5d7dbc344ad676195660317d,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

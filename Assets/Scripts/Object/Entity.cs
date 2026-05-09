@@ -9,6 +9,7 @@ public class Entity : PoolObject
 
     public event Action OnDie;
     public Action<float, float, float> OnChangeHp;
+    public Action<float, float, float> OnChangeGage;
     public Action OnInit;
 
     public LayerMask enemyLayer;

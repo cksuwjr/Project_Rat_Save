@@ -18,17 +18,20 @@ public class RollingShoot : Skill
 
         var move = GetComponent<Movement>();
 
+        controller.OnChangeGage?.Invoke(0, 0.001f, aimingTime);
         while (Input.GetButton(skill_key.ToString()))
         {
             if (timer < aimingTime)
                 timer += Time.deltaTime;
             else
             {
-                var entity = controller.GetNearEnemy(10);
+                var entity = controller.GetNearEnemy(weaponManager.weaponRange);
                 if (entity) move.See(entity);
             }
+            controller.OnChangeGage?.Invoke(timer, timer, aimingTime);
             yield return null;
         }
+        controller.OnChangeGage?.Invoke(0, 0.001f, aimingTime);
 
         animator?.SetTrigger("Fire3");
 
