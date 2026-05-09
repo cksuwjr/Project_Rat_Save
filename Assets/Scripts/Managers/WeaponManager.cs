@@ -11,6 +11,7 @@ public class WeaponManager : MonoBehaviour
 {
     private WeaponType weaponType = 0;
     public Transform hand;
+    public float weaponRange;
 
     private bool[] fire = new bool[5] { false, false, false, false, false };
 
@@ -52,6 +53,8 @@ public class WeaponManager : MonoBehaviour
                 skills[1].Init(KeyInput.Fire2, 0.6f, SkillType.Base, 70f);
                 skills[1].skill_Level = 1;
 
+                weaponRange = 2f;
+
                 break;
 
             case WeaponType.Wood_Carving:
@@ -63,6 +66,8 @@ public class WeaponManager : MonoBehaviour
                 skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 70f);
                 skills[1].skill_Level = 1;
 
+                weaponRange = 2f;
+
                 break;
 
             case WeaponType.Bow:
@@ -73,6 +78,8 @@ public class WeaponManager : MonoBehaviour
                 skills[1] = gameObject.AddComponent<RollingShoot>();
                 skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 35f);
                 skills[1].skill_Level = 1;
+
+                weaponRange = 8f;
 
                 break;
         }

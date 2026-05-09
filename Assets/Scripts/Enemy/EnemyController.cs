@@ -50,7 +50,7 @@ public class EnemyController : Entity
 
     CapsuleCollider capCollider;
 
-    public override Vector3 GetDirection { get { return InputVector; } }
+    public override Vector3 GetDirection { get { return new Vector3(transform.forward.x, 0, transform.forward.z).normalized; } }
 
 
     public void ChangeState(EnemyState state)
@@ -122,11 +122,15 @@ public class EnemyController : Entity
                 animator?.SetBool("Move", direction.sqrMagnitude > 0.01f);
                 SetMoveTarget(target.transform.position);
                 timer = 0f;
+                nmAgent.isStopped = false;
             }
 
-            if (target.CompareTag("Player") && Vector3.Distance(transform.position, target.transform.position) < 2)
+            if (target.CompareTag("Player") && Vector3.Distance(transform.position, target.transform.position) < weaponManager.weaponRange)
+            {
+                nmAgent.isStopped = true;
+                GetComponent<Movement>().See(target.GetComponent<Entity>(), 4000);
                 ChangeState(EnemyState.Attack);
-
+            }
             if (target.CompareTag("Weapon") && Vector3.Distance(transform.position, target.transform.position) < 1.3f)
             {
                 weaponManager.Fire(KeyInput.Fire5);
@@ -352,6 +356,18 @@ public class EnemyController : Entity
         //hittable = false;
         yield return null;
         hittable = true;
+    }
+
+    public override void StopAct()
+    {
+        movement.Movable = false;
+    }
+
+    public override void StartAct()
+    {
+        if (isDead) return;
+
+        movement.Movable = true;
     }
 }
 

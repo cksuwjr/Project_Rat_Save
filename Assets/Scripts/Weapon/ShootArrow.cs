@@ -17,17 +17,22 @@ public class ShootArrow : Skill
 
         var move = GetComponent<Movement>();
 
-        while(Input.GetButton(skill_key.ToString()))
+        controller.OnChangeGage?.Invoke(0, 0.001f, aimingTime);
+        while (Input.GetButton(skill_key.ToString()))
         {
+            controller.OnChangeGage?.Invoke(timer, timer + Time.deltaTime, aimingTime);
+
             if (timer < aimingTime)
                 timer += Time.deltaTime;
             else
             {
-                var entity = controller.GetNearEnemy(10);
+                var entity = controller.GetNearEnemy(weaponManager.weaponRange);
                 if(entity) move.See(entity);
             }
+
             yield return null;
         }
+        controller.OnChangeGage?.Invoke(0, 0.001f, aimingTime);
 
         animator?.SetTrigger("Fire1");
 
