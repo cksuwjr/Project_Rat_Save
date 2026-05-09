@@ -64,8 +64,11 @@ public class GetWeapon : Skill
             weapon.gameObject.transform.localScale = weapon.weaponEquipScale;
 
             weapon.isUse = true;
+            weapon.GetWeaponEvent?.Invoke();
+            weapon.GetWeaponEvent = null;
 
             weaponManager.ChangeWeapon(weapon.weaponType);
+
         }
         else
             weaponManager.ChangeWeapon(WeaponType.Hand);

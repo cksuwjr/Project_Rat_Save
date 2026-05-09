@@ -39,8 +39,6 @@ public class Punch : Skill
 
         enemy?.GetDamage(controller, damage + status.AttackPower, skill_Type, 0.5f, 1);
 
-        if(gameObject != GameManager.Instance.Player)
-            Debug.Log("АјАн" + gameObject.name);
         yield return YieldInstructionCache.WaitForSeconds(0.25f);
 
         if (weaponManager) weaponManager.attackable = true;

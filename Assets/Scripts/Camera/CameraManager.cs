@@ -62,7 +62,12 @@ public class CameraManager : MonoBehaviour
             CameraManager.cameraMode = CameraMode.CAM3;
         }
 
-        if(CameraManager.cameraMode == CameraMode.CAM3)
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            PlayerPrefs.DeleteAll();
+        }
+
+        if (CameraManager.cameraMode == CameraMode.CAM3)
         {
             if (Input.GetMouseButton(0)) // 드래그할 때만
             {
@@ -86,8 +91,7 @@ public class CameraManager : MonoBehaviour
             {
                 if(hit.collider.CompareTag("ShopOwner"))
                 {
-                    Debug.Log("e");
-                    UIManager.Instance.UI_Chat_OpenClose();
+                    UIManager.Instance.UI_ShopChat_OpenClose();
                 }
             }
         }
