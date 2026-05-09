@@ -15,7 +15,8 @@ public class GameManager : Singleton<GameManager>
 
     public bool isNextStageReady;
     public GameObject clearNpc;
-
+    public int chatCount = 0;
+    const int TUTORIAL_COUNT = 3;
 
     [SerializeField] private GameObject player;
 
@@ -108,11 +109,15 @@ public class GameManager : Singleton<GameManager>
 
         List<StageData> stageData = StageDataManager.Instance.stageDatas;
 
+
         GameObject spawned;
 
-        for (int i = 0; i < stageData.Count; i++)
+        // GetBool  isTutorial End ?
+        int i = PlayerPrefs.GetInt("StageData", 0);
+
+        for (; i < stageData.Count; i++)
         {
-            Debug.Log("Stage - " + (i + 1));
+            Debug.Log("Stage - " + (i));
 
             for (int j = 0; j < stageData[i].spawnDatas.Count; j++)
             {
@@ -142,8 +147,29 @@ public class GameManager : Singleton<GameManager>
                 yield return null;
             }
 
-            StageClear();
-            
+
+            chatCount = 0;
+
+            UIManager.Instance.UI_Chat_OpenClose();
+            while (chatCount < stageData[i].chatDatas.Count)
+            { 
+                UIManager.Instance.UI_Chat_Set(stageData[i].chatDatas[chatCount]);
+                yield return null;
+            }
+            UIManager.Instance.UI_Chat_OpenClose();
+
+            StageClear(TUTORIAL_COUNT - 2 < i);
+            if (i == TUTORIAL_COUNT - 2) ReadyToStage();
+
+            UIManager.Instance.UI_Chat_Set(stageData[i].shopChatData);
+
+            if (i == TUTORIAL_COUNT - 1)  // Set Tutorial End
+            {
+                PlayerPrefs.SetInt("StageData", TUTORIAL_COUNT);
+                PlayerPrefs.Save();
+            }
+
+
 
             while (!isNextStageReady)
             {
@@ -158,9 +184,11 @@ public class GameManager : Singleton<GameManager>
         yield return null;
     }
 
-    public void StageClear()
+    public void StageClear(bool npcUse = true)
     {
         isNextStageReady = false;
+
+        if (!npcUse) return;
 
         var npcPos = GameManager.Instance.player.transform.position;
         npcPos.y = 0;

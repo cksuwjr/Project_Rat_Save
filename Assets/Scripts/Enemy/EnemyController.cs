@@ -282,7 +282,6 @@ public class EnemyController : Entity
 
     protected override void Die()
     {
-        Debug.Log("Á×À½");
         base.Die();
 
         StopAllCoroutines();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponObject : MonoBehaviour
 {
@@ -10,4 +11,6 @@ public class WeaponObject : MonoBehaviour
     public Vector3 weaponEquipScale;
 
     public bool isUse = false;
+
+    public UnityEvent GetWeaponEvent;
 }

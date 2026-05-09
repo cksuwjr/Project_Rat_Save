@@ -58,7 +58,6 @@ public class WeaponManager : MonoBehaviour
                 skills[0] = gameObject.AddComponent<Punch>();
                 skills[0].Init(KeyInput.Fire1, 0.7f, SkillType.Base, 120f);
                 skills[0].skill_Level = 1;
-                Debug.Log("¹Ù²å´Âµð");
 
                 skills[1] = gameObject.AddComponent<Kick>();
                 skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 70f);

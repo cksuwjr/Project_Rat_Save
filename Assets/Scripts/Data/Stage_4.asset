@@ -34,3 +34,10 @@ MonoBehaviour:
     speed: 3
     spawnTerm: 1
     spawnCount: 5
+  chatDatas: []
+  shopChatData:
+    nameText: "\uC218\uC0C1\uD55C \uD6C4\uB4DC\uC758 \uC0AC\uB098\uC774"
+    chatText: "\uB2E8\uACE8\uC774 \uB418\uC5C8\uAD6C\uB9CC \uD5C8\uD5C8"
+    saySprite: {fileID: 21300000, guid: 3f27757598008624f87e9cecef7ada57, type: 3}
+    selectBtn1_Text: "\uAD6C\uB9E4\uD560\uAC8C\uC694!"
+    selectBtn2_Text: "\uC900\uBE44\uB410\uC5B4\uC694!"
