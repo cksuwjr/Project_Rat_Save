@@ -79,7 +79,7 @@ public class Entity : PoolObject
         isDead = true;
 
         OnDie?.Invoke();
-        Invoke("ReturnToPool", 1.5f);
+        Invoke("ReturnToPool", 2f);
     }
 
     public virtual void StopAct() { }

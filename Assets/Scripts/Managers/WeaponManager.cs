@@ -18,6 +18,8 @@ public class WeaponManager : MonoBehaviour
 
     public bool attackable = true;
 
+    public Skill[] Skills { get { return skills; } }
+
     private void Awake()
     {
         
@@ -35,6 +37,7 @@ public class WeaponManager : MonoBehaviour
     public void ChangeWeapon(WeaponType weapon)
     {
         if (skills[0]) { Destroy(skills[0]); skills[0] = null; }
+        if (skills[1]) { Destroy(skills[1]); skills[1] = null; }
 
         weaponType = weapon;
 
@@ -53,8 +56,9 @@ public class WeaponManager : MonoBehaviour
 
             case WeaponType.Wood_Carving:
                 skills[0] = gameObject.AddComponent<Punch>();
-                skills[0].Init(KeyInput.Fire1, 1f, SkillType.Base, 120f);
+                skills[0].Init(KeyInput.Fire1, 0.7f, SkillType.Base, 120f);
                 skills[0].skill_Level = 1;
+                Debug.Log("¹Ù²å´Âµð");
 
                 skills[1] = gameObject.AddComponent<Kick>();
                 skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 70f);
