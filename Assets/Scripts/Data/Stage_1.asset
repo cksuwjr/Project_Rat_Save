@@ -52,3 +52,24 @@ MonoBehaviour:
     saySprite: {fileID: 21300000, guid: 3f27757598008624f87e9cecef7ada57, type: 3}
     selectBtn1_Text: ".. \uAD6C\uB9E4\uD560\uAC8C\uC694"
     selectBtn2_Text: "\uB410\uC5B4\uC694! \uD264"
+  shopItemDatas:
+  - itemText: "\uACF5\uACA9\uB825"
+    itemSprite: {fileID: 21300000, guid: cece08bcebd5bf24a8842d38d91411d1, type: 3}
+    itemType: 0
+    value: 10
+    cost: 5
+  - itemText: "\uACF5\uACA9\uC18D\uB3C4"
+    itemSprite: {fileID: 21300000, guid: 0c2d6f4a9820cf64aaece137f064fd41, type: 3}
+    itemType: 1
+    value: 10
+    cost: 5
+  - itemText: "\uC774\uB3D9\uC18D\uB3C4"
+    itemSprite: {fileID: 21300000, guid: 8c4d801913364e34a9cce7b4d2a81b51, type: 3}
+    itemType: 2
+    value: 10
+    cost: 30
+  - itemText: "\uCCB4\uB825\uD68C\uBCF5"
+    itemSprite: {fileID: 21300000, guid: fdc35c32e02adda48b9581068041bd3d, type: 3}
+    itemType: 3
+    value: 400
+    cost: 2

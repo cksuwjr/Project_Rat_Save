@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,6 +24,14 @@ public class UIManager : SingletonDestroy<UIManager>, IManager
     private Button selectBtn1;
     private Button selectBtn2;
 
+    private TextMeshProUGUI moneyText;
+
+
+
+    private Transform slotContent;
+    private GameObject slot;
+    private List<GameObject> slots = new List<GameObject>();
+
     public void Init()
     {
         canvas = GameObject.Find("UICanvas");
@@ -42,36 +51,51 @@ public class UIManager : SingletonDestroy<UIManager>, IManager
         ui_Shop = canvas.transform.GetChild(1).gameObject;
 
         var viewPort = ui_Shop.transform.GetChild(0).GetChild(1).GetComponent<ScrollRect>().viewport;
-        var content = viewPort.GetChild(0);
-        var slot = content.GetChild(0).gameObject;
-
-        var slot1 = Instantiate(slot, content);
-        SetSlot(slot1, "공격력 증가");
-
-        var slot2 = Instantiate(slot, content);
-        SetSlot(slot2, "공격속도\n증가");
-
-        var slot3 = Instantiate(slot, content);
-        SetSlot(slot3, "체력 증가");
-
-        var slot4 = Instantiate(slot, content);
-        SetSlot(slot4, "아무거나 1");
-
-        var slot5 = Instantiate(slot, content);
-        SetSlot(slot5, "아무거나 2");
+        slotContent = viewPort.GetChild(0);
+        slot = slotContent.GetChild(0).gameObject;
 
 
         var exitShopBtn = ui_Shop.transform.GetChild(0).GetChild(2).GetComponent<Button>();
         exitShopBtn.onClick.AddListener(() => { ui_Shop.SetActive(false); ui_Chat.SetActive(true); });
 
+        ui_Shop.transform.GetChild(0).GetChild(3).TryGetComponent<TextMeshProUGUI>(out moneyText);
+
+        GameManager.Instance.OnChangeMoney += (value) => { moneyText.text = value.ToString(); };
     }
 
-    public void SetSlot(GameObject slot, string itemText = "", Sprite itemSprite = null, UnityAction btnEvent = null)
+    public void AddSlots(List<ShopItemData> datas)
     {
-        slot.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = itemText;
-        if(itemSprite != null) slot.transform.GetChild(1).GetComponent<Image>().sprite = itemSprite;
-        if (btnEvent != null) slot.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(btnEvent);
-        else slot.transform.GetChild(2).GetComponent<Button>().onClick.RemoveAllListeners();
+        for (int i = 0; i < slots.Count; i++)
+            Destroy(slots[i]);
+
+        slots.Clear();
+
+        for(int i = 0; i < datas.Count; i++)
+            AddSlot(datas[i]);
+
+    }
+
+
+    public void AddSlot(ShopItemData data)
+    {
+        var slotInstance = Instantiate(slot, slotContent);
+        SetSlot(slotInstance, data);
+        slots.Add(slotInstance);
+    }
+
+    public void SetSlot(GameObject slot, ShopItemData data)
+    {
+        slot.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = data.itemText;
+        if(data.itemSprite != null) slot.transform.GetChild(1).GetComponent<Image>().sprite = data.itemSprite;
+        slot.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "+ " + data.value.ToString();
+
+        Button btn = slot.transform.GetChild(3).GetComponent<Button>();
+
+        btn.transform.GetChild(0).GetComponent<Text>().text = data.cost.ToString();
+
+        btn.onClick.RemoveAllListeners();
+
+        btn.onClick.AddListener(() => GameManager.Instance.UpgradePlayer(data.itemType, data.value, data.cost));
 
         slot.SetActive(true);
     }
