@@ -100,7 +100,8 @@ public abstract class Skill : MonoBehaviour
     }
     public void StopCast()
     {
-        Castable = false;
+        //Castable = false;
+        Castable = true;
         StopCoroutine("Cast_");
     }
     protected abstract IEnumerator Cast_();

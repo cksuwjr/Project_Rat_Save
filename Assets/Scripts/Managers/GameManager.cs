@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,8 @@ public class GameManager : Singleton<GameManager>
     private UIManager uiManager;
     private SoundManager soundManager;
     private PoolManager poolManager;
+
+    private CameraManager cameraManager;
     //private TitleSceneManager titleSceneManager;
     //private ScenarioManager scenarioManager;
 
@@ -21,6 +24,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject player;
 
 
+    private int money;
+
 
     public GameObject Player
     {
@@ -31,6 +36,9 @@ public class GameManager : Singleton<GameManager>
             return player;
         }
     }
+
+    public int Money { get { return money; } set { money = value; OnChangeMoney?.Invoke(money); } }
+    public Action<int> OnChangeMoney;
 
     protected override void DoAwake()
     {
@@ -56,6 +64,11 @@ public class GameManager : Singleton<GameManager>
         else
             poolManager = null;
 
+        if (GameObject.Find("CameraManager"))
+            GameObject.Find("CameraManager")?.TryGetComponent<CameraManager>(out cameraManager);
+        else
+            cameraManager = null;
+
         //if (GameObject.Find("TitleSceneManager"))
         //    GameObject.Find("TitleSceneManager")?.TryGetComponent<TitleSceneManager>(out titleSceneManager);
         //else
@@ -73,7 +86,7 @@ public class GameManager : Singleton<GameManager>
         uiManager?.Init();
         poolManager?.Init();
         soundManager?.Init();
-
+        cameraManager?.Init();
         //titleSceneManager?.Init();
         //scenarioManager?.Init();
     }
@@ -85,12 +98,10 @@ public class GameManager : Singleton<GameManager>
 
     private void GameStart()
     {
-        GameManager.Instance.player.GetComponent<Entity>().Init(10000, 5);
+        GameManager.Instance.player.GetComponent<Entity>().Init(1200, 5);
+        Money = 10;
 
         StartCoroutine("Spawn");
-        
-
-
 
         //var cat1 = GameManager.Instance.poolManager.yellowCatPool.GetPoolObject();
         //cat1.transform.position = new Vector3(2, 0.5f, 7.68f);
@@ -159,6 +170,8 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.UI_Chat_OpenClose();
 
             StageClear(TUTORIAL_COUNT - 2 < i);
+            UIManager.Instance.AddSlots(stageData[i].shopItemDatas);
+
             if (i == TUTORIAL_COUNT - 2) ReadyToStage();
 
             UIManager.Instance.UI_Chat_Set(stageData[i].shopChatData);
@@ -203,5 +216,31 @@ public class GameManager : Singleton<GameManager>
 
         clearNpc.gameObject.SetActive(false);
 
+    }
+
+    public void UpgradePlayer(ItemType itemType, float value, int cost)
+    {
+        if (cost > Money) return;
+
+        Money -= cost;
+
+        switch (itemType)
+        {
+            case ItemType.AttackPowerPlus:
+                GameManager.Instance.Player.GetComponent<Status>().AttackPower += value;
+                break;
+            case ItemType.AttackSpeedPlus:
+                //btn.onClick.AddListener(() => GameManager.Instance.Player.GetComponent<Status>().AttackSpeed += data.value);
+                //slot.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text += "%";
+                break;
+            case ItemType.MoveSpeedPlus:
+                GameManager.Instance.Player.GetComponent<Status>().MoveSpeed += value;
+                break;
+            case ItemType.Heal:
+                GameManager.Instance.Player.GetComponent<PlayerController>().GetHeal(400);
+                break;
+            case ItemType.Else:
+                break;
+        }
     }
 }

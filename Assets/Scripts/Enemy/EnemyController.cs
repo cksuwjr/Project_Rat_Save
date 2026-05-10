@@ -325,7 +325,7 @@ public class EnemyController : Entity
         nmAgent.isStopped = true;
         nmAgent.enabled = false;
 
-        
+        GameManager.Instance.Money++;
     }
 
     public void GetCC(float time)

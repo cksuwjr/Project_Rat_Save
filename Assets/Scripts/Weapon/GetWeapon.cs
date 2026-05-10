@@ -79,6 +79,7 @@ public class GetWeapon : Skill
 
         controller.StartAct();
 
+
         yield return null;
     }
 }

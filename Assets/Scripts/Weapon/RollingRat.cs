@@ -6,6 +6,16 @@ public class RollingRat : Skill
 {
     protected override IEnumerator Cast_()
     {
+        var skills = weaponManager.Skills;
+        for (int i = 0; i < skills.Length; i++)
+        {
+            if (!skills[i]) continue;
+
+            if (skills[i].skill_key == skill_key)
+                continue;
+            skills[i]?.StopCast();
+        }
+
         controller.StopAct();
 
         animator?.SetTrigger("Fire3");

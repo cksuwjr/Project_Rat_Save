@@ -11,6 +11,6 @@ public class KeyboardInputHandle : MonoBehaviour, IInputHandle
 
     public bool GetKeyInput(KeyInput input)
     {
-        return Input.GetButtonDown(input.ToString());
+        return Input.GetButton(input.ToString());
     }
 }

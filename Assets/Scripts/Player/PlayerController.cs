@@ -74,28 +74,21 @@ public class PlayerController : Entity
 
 
 
-
-        //if (CameraManager.cameraMode != CameraMode.CAM3)
-        //    finalDirection = InputVector.normalized;
-        //else
-        //    finalDirection = Input3DVector.normalized;
-
-
-
-
         if (movement.Movable)
         {
             if (inputHandle.GetKeyInput(KeyInput.Fire1))
                 weaponManager.Fire(KeyInput.Fire1);
             if (inputHandle.GetKeyInput(KeyInput.Fire2))
                 weaponManager.Fire(KeyInput.Fire2);
-            if (inputHandle.GetKeyInput(KeyInput.Fire3))
-                weaponManager.Fire(KeyInput.Fire3);
+            //if (inputHandle.GetKeyInput(KeyInput.Fire3))
+            //    weaponManager.Fire(KeyInput.Fire3);
             if (inputHandle.GetKeyInput(KeyInput.Fire4))
                 weaponManager.Fire(KeyInput.Fire4);
             if (inputHandle.GetKeyInput(KeyInput.Fire5))
                 weaponManager.Fire(KeyInput.Fire5);
         }
+        if (inputHandle.GetKeyInput(KeyInput.Fire3))
+            weaponManager.Fire(KeyInput.Fire3);
     }
 
     private void FixedUpdate()

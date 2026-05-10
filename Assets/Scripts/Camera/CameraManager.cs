@@ -10,7 +10,7 @@ public enum CameraMode
     CAM3,
 }
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : MonoBehaviour, IManager
 {
     [SerializeField] private Camera cam1;
     [SerializeField] private Camera cam2;
@@ -22,8 +22,7 @@ public class CameraManager : MonoBehaviour
     public static CameraMode cameraMode;
 
     // Update is called once per frame
-
-    private void Awake()
+    public void Init()
     {
         if (cam1.gameObject.activeSelf) CameraManager.cameraMode = CameraMode.CAM1;
         if (cam2.gameObject.activeSelf) CameraManager.cameraMode = CameraMode.CAM2;
@@ -114,4 +113,5 @@ public class CameraManager : MonoBehaviour
             cam3.transform.rotation = Quaternion.Euler(fixedPitch, targetY, 0f);
         }
     }
+
 }

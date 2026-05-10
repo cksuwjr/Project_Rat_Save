@@ -124,21 +124,22 @@ public class WeaponManager : MonoBehaviour
     {
         if (!attackable)
         {
-            fire[0] = false;
-            fire[1] = false;
-            fire[2] = false;
+            fire[0] = false;   // j
+            fire[1] = false;   // k
+            //fire[2] = false; // rolling
             fire[3] = false;
             fire[4] = false;
-            return;
+            //return;
         }
-            
 
-        for(int i = 0; i < fire.Length; i++)
+
+        for (int i = 0; i < fire.Length; i++)
         {
             if (fire[i])
             {
                 skills[i]?.Cast();
                 fire[i] = false;
+                Debug.Log("cast" + i);
             }
         }
     }
