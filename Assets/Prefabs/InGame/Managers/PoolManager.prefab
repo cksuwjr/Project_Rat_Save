@@ -47,6 +47,53 @@ MonoBehaviour:
   poolObject: {fileID: -7732582856545935047, guid: fe503586dabafed479669b28ba435fe8,
     type: 3}
   poolCount: 5
+--- !u!1 &5339958510404083150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3525554340365329669}
+  - component: {fileID: 6736215003239754326}
+  m_Layer: 0
+  m_Name: LeeShinQPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3525554340365329669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5339958510404083150}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8318517223688747574}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6736215003239754326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5339958510404083150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13389d841cd561543b739f4a9c8bc6a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 4099426449138443318, guid: 21ba91497f297c84a8435553aac2daf3,
+    type: 3}
+  poolCount: 10
 --- !u!1 &5362068537067187698
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +435,7 @@ Transform:
   - {fileID: 597565636536707936}
   - {fileID: 747554868794109159}
   - {fileID: 2724559524915838102}
+  - {fileID: 3525554340365329669}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7532407321974450496
@@ -408,3 +456,4 @@ MonoBehaviour:
   yellowCatPool: {fileID: 0}
   blackCatPool: {fileID: 0}
   arrowPool: {fileID: 0}
+  leeshinQPool: {fileID: 0}

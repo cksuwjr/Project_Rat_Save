@@ -16,6 +16,8 @@ public class PoolManager : SingletonDestroy<PoolManager>, IManager
     
     public Pool arrowPool;
 
+    public Pool leeshinQPool;
+
 
     public void Init()
     {
@@ -31,6 +33,8 @@ public class PoolManager : SingletonDestroy<PoolManager>, IManager
 
         transform.GetChild(count++).TryGetComponent<Pool>(out arrowPool);
 
+        transform.GetChild(count++).TryGetComponent<Pool>(out leeshinQPool);
+
 
         damagePool?.Init();
 
@@ -43,6 +47,8 @@ public class PoolManager : SingletonDestroy<PoolManager>, IManager
         blackCatPool?.Init();
 
         arrowPool?.Init();
+
+        leeshinQPool?.Init();
     }
 
     public Pool GetPool(int n)
