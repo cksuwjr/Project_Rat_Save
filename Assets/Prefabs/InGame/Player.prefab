@@ -309,11 +309,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 3024590440788662737}
-  skill1: {fileID: 0}
-  skill2: {fileID: 0}
-  skill3: {fileID: 0}
-  skill4: {fileID: 0}
-  skill5: {fileID: 0}
+  head: {fileID: 5564910285852853562}
+  weaponRange: 0
+  skills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   attackable: 1
 --- !u!1 &2146756351671717501
 GameObject:
@@ -942,6 +945,12 @@ PrefabInstance:
 --- !u!4 &3024590440788662737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3788572193007952866, guid: a23e8009c98d1184fbcc0a2b4e60fb49,
+    type: 3}
+  m_PrefabInstance: {fileID: 7103805344955401679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5564910285852853562 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3436036755398836469, guid: a23e8009c98d1184fbcc0a2b4e60fb49,
     type: 3}
   m_PrefabInstance: {fileID: 7103805344955401679}
   m_PrefabAsset: {fileID: 0}

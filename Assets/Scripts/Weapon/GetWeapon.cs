@@ -32,6 +32,22 @@ public class GetWeapon : Skill
                 }
             }
         }
+        foreach (Transform weaponTr in weaponManager.head.GetComponentInChildren<Transform>())
+        {
+            if (weaponTr.gameObject.CompareTag("Weapon"))
+            {
+                if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
+                {
+                    treshWeapon.transform.SetParent(null);
+                    treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    treshWeapon.isUse = false;
+
+                    treshWeapon.AddComponent<Rigidbody>();
+                    break;
+                }
+            }
+        }
 
         Collider[] cols = Physics.OverlapSphere(transform.position, 1.4f);
 
@@ -42,6 +58,8 @@ public class GetWeapon : Skill
             if (col.gameObject.CompareTag("Weapon"))
             {
                 if (col.gameObject == weaponManager.hand.gameObject) continue;
+                if (col.gameObject == weaponManager.head.gameObject) continue;
+
                 if (col.TryGetComponent<WeaponObject>(out weapon))
                     if (treshWeapon == weapon || weapon.isUse)
                     {
@@ -58,7 +76,9 @@ public class GetWeapon : Skill
             Destroy(weapon.GetComponent<Rigidbody>());
             //weapon.GetComponent<Rigidbody>().useGravity = false;
 
-            weapon.transform.SetParent(weaponManager.hand.transform);
+            if(weapon.equipType == WeaponEquipType.Hand) weapon.transform.SetParent(weaponManager.hand.transform);
+            if(weapon.equipType == WeaponEquipType.Head) weapon.transform.SetParent(weaponManager.head.transform);
+
             weapon.transform.localPosition = weapon.weaponEquipPos;
             weapon.transform.localRotation = Quaternion.Euler(weapon.weaponEquipRot);
             weapon.gameObject.transform.localScale = weapon.weaponEquipScale;
@@ -68,7 +88,6 @@ public class GetWeapon : Skill
             weapon.GetWeaponEvent = null;
 
             weaponManager.ChangeWeapon(weapon.weaponType);
-
         }
         else
             weaponManager.ChangeWeapon(WeaponType.Hand);

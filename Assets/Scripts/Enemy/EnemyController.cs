@@ -169,7 +169,8 @@ public class EnemyController : Entity
 
 
 
-        if (other.CompareTag("Weapon") && !weaponManager.hand.GetComponentInChildren<WeaponObject>())
+        if (other.CompareTag("Weapon") 
+            && (!weaponManager.hand.GetComponentInChildren<WeaponObject>() && !weaponManager.head.GetComponentInChildren<WeaponObject>()))
         {
             WeaponObject weapon;
             if (other.TryGetComponent<WeaponObject>(out weapon))
@@ -303,6 +304,24 @@ public class EnemyController : Entity
 
         WeaponObject treshWeapon = null;
         foreach (Transform weaponTr in weaponManager.hand.GetComponentInChildren<Transform>())
+        {
+            if (weaponTr.gameObject.CompareTag("Weapon"))
+            {
+                if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
+                {
+                    treshWeapon.transform.SetParent(null);
+                    treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    treshWeapon.isUse = false;
+
+                    treshWeapon.AddComponent<Rigidbody>();
+                    break;
+                }
+            }
+        }
+
+        treshWeapon = null;
+        foreach (Transform weaponTr in weaponManager.head.GetComponentInChildren<Transform>())
         {
             if (weaponTr.gameObject.CompareTag("Weapon"))
             {

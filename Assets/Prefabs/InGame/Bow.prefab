@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 304ec1de9fe303e45b3a8c4350dc67ef,
         type: 3}
       propertyPath: m_Name
-      value: hawl
+      value: Bow
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 304ec1de9fe303e45b3a8c4350dc67ef,
         type: 3}
@@ -171,7 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6382611b5784b8e42a7ec4cd5b9fd2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 2
+  weaponType: 4
+  equipType: 0
   weaponEquipPos: {x: -0.008597026, y: -0.1267596, z: 0.03653545}
   weaponEquipRot: {x: 187.724, y: 26.968, z: -1.365997}
   weaponEquipScale: {x: 5, y: 5, z: 5}

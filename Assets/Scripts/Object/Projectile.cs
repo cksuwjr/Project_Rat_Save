@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,9 @@ public class Projectile : PoolObject
 
     private SkillType type;
 
-    public void Init(Entity attacker, Vector3 direction, float damage, float speed, SkillType skillType = SkillType.Base)
+    public Action<GameObject> OnHitEvent;
+
+    public void Init(Entity attacker, Vector3 direction, float damage, float speed, float duration = 3f, SkillType skillType = SkillType.Base)
     {
         this.attacker = attacker;
         this.direction = direction;
@@ -23,7 +26,7 @@ public class Projectile : PoolObject
 
         transform.forward = this.direction;
 
-        Invoke("ReturnToPool", 3f);
+        Invoke("ReturnToPool", duration);
 
     }
 
@@ -39,6 +42,7 @@ public class Projectile : PoolObject
         if (other.isTrigger) return;
 
         other.GetComponent<Entity>().GetDamage(attacker, damage, type);
+        OnHitEvent?.Invoke(other.gameObject);
 
         CancelInvoke("ReturnToPool");
         ReturnToPool();

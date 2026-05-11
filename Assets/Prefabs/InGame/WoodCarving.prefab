@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6101245037333740005}
   - component: {fileID: -111529176545021513}
   m_Layer: 0
-  m_Name: WeaponObject
+  m_Name: WoodCarving
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

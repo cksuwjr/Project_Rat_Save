@@ -551,6 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 6568058953126337294}
+  head: {fileID: 8271383906093363119}
   weaponRange: 0
   skills:
   - {fileID: 0}
@@ -985,6 +986,12 @@ Transform:
 --- !u!4 &6568058953126337294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3192558830069395561, guid: ca84901f039ca56428d7a7485fb0737a,
+    type: 3}
+  m_PrefabInstance: {fileID: 619155309268964505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8271383906093363119 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -405757517938427082, guid: ca84901f039ca56428d7a7485fb0737a,
     type: 3}
   m_PrefabInstance: {fileID: 619155309268964505}
   m_PrefabAsset: {fileID: 0}

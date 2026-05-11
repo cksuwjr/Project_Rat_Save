@@ -1,16 +1,32 @@
 using UnityEngine;
 
+public enum WeaponEquipType
+{
+    Hand,
+    Head,
+}
+
 public enum WeaponType
 {
     Hand,
     Wood_Carving,
+    Glove,
+    Sword,
     Bow,
+    Gun,
+    ShotGun,
+    Fire_Extinguisher,
+    Lee_Shin,
+    Pica_Chu,
 }
 
 public class WeaponManager : MonoBehaviour
 {
     private WeaponType weaponType = 0;
+
     public Transform hand;
+    public Transform head;
+
     public float weaponRange;
 
     private bool[] fire = new bool[5] { false, false, false, false, false };
@@ -28,11 +44,12 @@ public class WeaponManager : MonoBehaviour
 
     public void Init()
     {
-        var weapon = hand.GetComponentInChildren<WeaponObject>();
-        if (weapon)
-            ChangeWeapon(weapon.weaponType);
-        else
-            ChangeWeapon(WeaponType.Hand);
+        var weapon1 = hand.GetComponentInChildren<WeaponObject>();
+        var weapon2 = head.GetComponentInChildren<WeaponObject>();
+
+        if      (weapon1)    ChangeWeapon(weapon1.weaponType);
+        else if (weapon2)    ChangeWeapon(weapon2.weaponType);
+        else                 ChangeWeapon(WeaponType.Hand);
     }
 
     public void ChangeWeapon(WeaponType weapon)
@@ -78,6 +95,16 @@ public class WeaponManager : MonoBehaviour
                 skills[1] = gameObject.AddComponent<RollingShoot>();
                 skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 35f);
                 skills[1].skill_Level = 1;
+
+                weaponRange = 8f;
+
+                break;
+
+            case WeaponType.Lee_Shin:
+                skills[0] = gameObject.AddComponent<LeeShinQ>();
+                skills[0].Init(KeyInput.Fire1, 0.2f, SkillType.Base, 20f);
+                skills[0].skill_Level = 1;
+
 
                 weaponRange = 8f;
 
