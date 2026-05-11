@@ -77,7 +77,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 25170b2a56d55cb4d91218ac25cb84bf, type: 2}
+      objectReference: {fileID: 2100000, guid: 60773505650a93e46a93b959f8013cb1, type: 2}
     - target: {fileID: 919132149155446097, guid: 304ec1de9fe303e45b3a8c4350dc67ef,
         type: 3}
       propertyPath: m_Name
@@ -176,3 +176,6 @@ MonoBehaviour:
   weaponEquipRot: {x: 187.724, y: 26.968, z: -1.365997}
   weaponEquipScale: {x: 5, y: 5, z: 5}
   isUse: 0
+  GetWeaponEvent:
+    m_PersistentCalls:
+      m_Calls: []
