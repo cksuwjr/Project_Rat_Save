@@ -936,6 +936,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OCat
       objectReference: {fileID: 0}
+    - target: {fileID: 4525449429480767757, guid: 6e4c8a553fa062248bc500b928ec7687,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dea88d633bedfe44da4b826c5dfc661e, type: 2}
     - target: {fileID: 5866666021909216657, guid: 6e4c8a553fa062248bc500b928ec7687,
         type: 3}
       propertyPath: m_Controller
