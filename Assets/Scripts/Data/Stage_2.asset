@@ -15,21 +15,21 @@ MonoBehaviour:
   spawnDatas:
   - spawnerID: 0
     spawnType: 0
-    weaponType: 0
+    weaponType: 1
     hp: 200
     speed: 3
     spawnTerm: 1
     spawnCount: 5
   - spawnerID: 1
     spawnType: 0
-    weaponType: 0
+    weaponType: 1
     hp: 200
     speed: 3
     spawnTerm: 1
     spawnCount: 5
   - spawnerID: 2
     spawnType: 0
-    weaponType: 0
+    weaponType: 1
     hp: 200
     speed: 3
     spawnTerm: 1
