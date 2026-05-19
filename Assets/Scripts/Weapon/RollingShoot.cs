@@ -33,7 +33,7 @@ public class RollingShoot : Skill
         }
         controller.OnChangeGage?.Invoke(0, 0.001f, aimingTime);
 
-        animator?.SetTrigger("Fire3");
+        animator?.SetTrigger("Fire2");
 
         timer = 0;
         while (timer < 0.14f)
