@@ -150,6 +150,8 @@ public class EnemyController : Entity
 
         int num = UnityEngine.Random.Range(1, 3);
 
+        
+
         switch (num)
         {
             case 1:
@@ -197,7 +199,8 @@ public class EnemyController : Entity
 
     private void SetMoveTarget(Vector3 newPos)
     {
-        if(isDead) return;
+        if (isDead) return;
+        if (isHit) return;
         //var origin = direction;
         //direction = newPos - transform.position;
         //direction.y = 0;
@@ -273,12 +276,13 @@ public class EnemyController : Entity
             ChangeState(EnemyState.Chase);
         }
 
-        
+        nmAgent.isStopped = true;
 
         if ((SkillType)enemyType != SkillType.Base && (SkillType)enemyType == skillType)
             base.GetDamage(this, damage * 0.05f, skillType, knockbackTime, effectNum);
         else
             base.GetDamage(this, damage, skillType, knockbackTime, effectNum);
+        
 
         OnChangeHp?.Invoke(prevHp, status.HP, status.MaxHP);
         StartCoroutine("Invinsible");
@@ -385,8 +389,10 @@ public class EnemyController : Entity
     public override void StartAct()
     {
         if (isDead) return;
+        if (isHit) return;
 
         movement.Movable = true;
+        nmAgent.isStopped = false;
     }
 }
 
