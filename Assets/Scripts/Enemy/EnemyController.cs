@@ -344,8 +344,12 @@ public class EnemyController : Entity
 
         capCollider.enabled = false;
 
-        nmAgent.ResetPath();
-        nmAgent.isStopped = true;
+
+        if (nmAgent.enabled)
+        {
+            nmAgent.isStopped = true;
+            nmAgent.ResetPath();
+        }
         nmAgent.enabled = false;
 
         GameManager.Instance.Money++;
@@ -392,7 +396,7 @@ public class EnemyController : Entity
         if (isHit) return;
 
         movement.Movable = true;
-        nmAgent.isStopped = false;
+        if(nmAgent.enabled) nmAgent.isStopped = false;
     }
 }
 
