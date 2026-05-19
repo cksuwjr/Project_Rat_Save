@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class Entity : PoolObject
     public LayerMask enemyLayer;
 
     public bool isDead = false;
+    public bool isHit = false;
 
     public virtual Vector3 GetDirection { get; }
 
@@ -27,6 +29,7 @@ public class Entity : PoolObject
     protected virtual void DoAwake()
     {
         isDead = false;
+        isHit = false;
     }
 
     public virtual void Init(float hp, float speed) 
@@ -36,6 +39,7 @@ public class Entity : PoolObject
         status.MoveSpeed = speed;
 
         isDead = false;
+        isHit = false;
 
         OnInit?.Invoke();
     }
@@ -67,10 +71,20 @@ public class Entity : PoolObject
                 effect.GetComponent<Effect>().Init();
             }
         }
+
+        Animator animator = GetComponentInChildren<Animator>();
+
+        StopCoroutine("HitStiff");
+
         if (status.HP <= 0)
         {
             status.HP = 0;
             Die();
+        }
+        else
+        {
+            if (animator) animator.SetTrigger("Hit");
+            StartCoroutine("HitStiff", 0.25f);
         }
 
     }
@@ -122,5 +136,16 @@ public class Entity : PoolObject
         var enemys = GetNearEnemys(range);
         
         return (enemys.Count > 0) ? enemys[0] : null;
+    }
+
+    private IEnumerator HitStiff(float time)
+    {
+        isHit = true;
+        StopAct();
+
+        yield return YieldInstructionCache.WaitForSeconds(time);
+
+        isHit = false;
+        StartAct();
     }
 }

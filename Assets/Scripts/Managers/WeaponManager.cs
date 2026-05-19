@@ -8,7 +8,7 @@ public enum WeaponEquipType
 
 public enum WeaponType
 {
-    Hand,
+    Hand = 0,
     Wood_Carving,
     Glove,
     Sword,
@@ -59,11 +59,14 @@ public class WeaponManager : MonoBehaviour
 
         weaponType = weapon;
 
+        GetComponentInChildren<Animator>().SetInteger("Weapon", (int)weapon);
+
         switch (weaponType)
         {
             case WeaponType.Hand:
                 skills[0] = gameObject.AddComponent<Punch>();
-                skills[0].Init(KeyInput.Fire1, 0.6f, SkillType.Base, 25f);
+                //skills[0].Init(KeyInput.Fire1, 0.6f, SkillType.Base, 25f);
+                skills[0].Init(KeyInput.Fire1, 0.01f, SkillType.Base, 1f);
                 skills[0].skill_Level = 1;
 
                 skills[1] = gameObject.AddComponent<Kick>();
@@ -166,7 +169,6 @@ public class WeaponManager : MonoBehaviour
             {
                 skills[i]?.Cast();
                 fire[i] = false;
-                Debug.Log("cast" + i);
             }
         }
     }

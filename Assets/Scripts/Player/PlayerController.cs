@@ -144,6 +144,7 @@ public class PlayerController : Entity
     public override void StartAct() 
     {
         if (isDead) return;
+        //if (isHit) return;
 
         movement.Movable = true;
     }
