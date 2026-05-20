@@ -2,8 +2,13 @@ using UnityEngine;
 
 public enum WeaponEquipType
 {
-    Hand,
+    Left_Hand,
+    Right_Hand,
+
     Head,
+
+    Back,
+
 }
 
 public enum WeaponType
@@ -24,8 +29,10 @@ public class WeaponManager : MonoBehaviour
 {
     private WeaponType weaponType = 0;
 
-    public Transform hand;
+    public Transform left_Hand;
+    public Transform right_Hand;
     public Transform head;
+    public Transform back;
 
     public float weaponRange;
 
@@ -44,7 +51,7 @@ public class WeaponManager : MonoBehaviour
 
     public void Init()
     {
-        var weapon1 = hand.GetComponentInChildren<WeaponObject>();
+        var weapon1 = left_Hand.GetComponentInChildren<WeaponObject>();
         var weapon2 = head.GetComponentInChildren<WeaponObject>();
 
         if      (weapon1)    ChangeWeapon(weapon1.weaponType);
@@ -89,6 +96,26 @@ public class WeaponManager : MonoBehaviour
                 weaponRange = 2f;
 
                 break;
+
+            case WeaponType.Glove:
+                if (left_Hand.GetComponentInChildren<WeaponObject>())
+                {
+                    skills[0] = gameObject.AddComponent<Punch>();
+                    skills[0].Init(KeyInput.Fire1, 0.4f, SkillType.Base, 65f);
+                    skills[0].skill_Level = 1;
+                }
+
+                if (right_Hand.GetComponentInChildren<WeaponObject>())
+                {
+                    skills[1] = gameObject.AddComponent<Punch>();
+                    skills[1].Init(KeyInput.Fire1, 0.4f, SkillType.Base, 65f);
+                    skills[1].skill_Level = 1;
+                }
+
+                weaponRange = 2f;
+
+                break;
+
 
             case WeaponType.Bow:
                 skills[0] = gameObject.AddComponent<ShootArrow>();

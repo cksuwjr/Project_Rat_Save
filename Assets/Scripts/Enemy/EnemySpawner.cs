@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         spawned.transform.position = spawnPosition;
 
 
-        var hand = spawned.GetComponent<WeaponManager>().hand;
+        var hand = spawned.GetComponent<WeaponManager>().left_Hand;
         var head = spawned.GetComponent<WeaponManager>().head;
         WeaponObject spawnedWeapon;
         switch(weapon)

@@ -55,7 +55,7 @@ public class LeeShinQ : Skill
 
             
 
-            leeshinQ.transform.position = weaponManager.hand.transform.position;
+            leeshinQ.transform.position = weaponManager.left_Hand.transform.position;
 
             leeshinQ.GetComponent<Projectile>().Init(controller, controller.GetDirection, damage + status.AttackPower * 0.3f, 22f, 0.5f);
             leeshinQ.GetComponent<Projectile>().OnHitEvent = null;

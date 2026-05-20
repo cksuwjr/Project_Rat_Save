@@ -521,6 +521,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   isDead: 0
+  isHit: 0
   enemyType: 0
 --- !u!114 &3284087643186782829
 MonoBehaviour:
@@ -550,8 +551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d03f3acb115b45bb557633e587bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 6568058953126337294}
+  left_Hand: {fileID: 6568058953126337294}
+  right_Hand: {fileID: 262904973169108239}
   head: {fileID: 8271383906093363119}
+  back: {fileID: 6203216156383108693}
   weaponRange: 0
   skills:
   - {fileID: 0}
@@ -950,6 +953,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8035995587496036275}
   m_SourcePrefab: {fileID: 100100000, guid: ca84901f039ca56428d7a7485fb0737a, type: 3}
+--- !u!4 &262904973169108239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8416760586357198442, guid: ca84901f039ca56428d7a7485fb0737a,
+    type: 3}
+  m_PrefabInstance: {fileID: 619155309268964505}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &312656751902796232 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ca84901f039ca56428d7a7485fb0737a,
@@ -980,6 +989,12 @@ Animator:
 --- !u!4 &1089051992241435506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ca84901f039ca56428d7a7485fb0737a,
+    type: 3}
+  m_PrefabInstance: {fileID: 619155309268964505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6203216156383108693 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2413385952557020468, guid: ca84901f039ca56428d7a7485fb0737a,
     type: 3}
   m_PrefabInstance: {fileID: 619155309268964505}
   m_PrefabAsset: {fileID: 0}

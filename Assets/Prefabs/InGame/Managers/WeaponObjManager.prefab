@@ -48,9 +48,9 @@ MonoBehaviour:
     type: 3}
   glove: {fileID: 0}
   sword: {fileID: 0}
-  bow: {fileID: 7337749295155345145, guid: 989d0ba256e38a14694b832158dab9c4, type: 3}
+  bow: {fileID: 6538073019021268279, guid: 0b2c30b1cc392b14cba98f7fa57da82d, type: 3}
   gun: {fileID: 0}
   shotGun: {fileID: 0}
   fireExtinguisher: {fileID: 0}
-  leeShin: {fileID: 2871755399531275929, guid: 65a02221c412b8d4ab741379654f73c1, type: 3}
+  leeShin: {fileID: 8702139802066748785, guid: 43177fa664fea5547a8f0a04d220354d, type: 3}
   picaChu: {fileID: 0}

@@ -16,12 +16,34 @@ public class GetWeapon : Skill
         yield return YieldInstructionCache.WaitForSeconds(0.35f);
 
         WeaponObject treshWeapon = null;
-        foreach(Transform weaponTr in weaponManager.hand.GetComponentInChildren<Transform>())
+        foreach(Transform weaponTr in weaponManager.left_Hand.GetComponentInChildren<Transform>())
         {
             if(weaponTr.gameObject.CompareTag("Weapon"))
             {
                 if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
                 {
+                    //if (treshWeapon.weaponType == WeaponType.Glove) break;
+
+
+                    treshWeapon.transform.SetParent(null);
+                    treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    treshWeapon.isUse = false;
+
+                    treshWeapon.AddComponent<Rigidbody>();
+                    break;
+                }
+            }
+
+        }
+        foreach (Transform weaponTr in weaponManager.right_Hand.GetComponentInChildren<Transform>())
+        {
+            if (weaponTr.gameObject.CompareTag("Weapon"))
+            {
+                if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
+                {
+                    //if (treshWeapon.weaponType == WeaponType.Glove) break;
+
                     treshWeapon.transform.SetParent(null);
                     treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                     //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
@@ -57,7 +79,8 @@ public class GetWeapon : Skill
         {
             if (col.gameObject.CompareTag("Weapon"))
             {
-                if (col.gameObject == weaponManager.hand.gameObject) continue;
+                if (col.gameObject == weaponManager.left_Hand.gameObject) continue;
+                if (col.gameObject == weaponManager.right_Hand.gameObject) continue;
                 if (col.gameObject == weaponManager.head.gameObject) continue;
 
                 if (col.TryGetComponent<WeaponObject>(out weapon))
@@ -71,13 +94,27 @@ public class GetWeapon : Skill
 
         if (weapon)
         {
+            if (treshWeapon != null)
+            if(weapon.weaponType != WeaponType.Glove && treshWeapon.weaponType == WeaponType.Glove)
+            {
+                treshWeapon.transform.SetParent(null);
+                treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                treshWeapon.isUse = false;
+
+                treshWeapon.AddComponent<Rigidbody>();
+            }
+
+
+
             weapon.GetComponent<BoxCollider>().isTrigger = true;
 
             Destroy(weapon.GetComponent<Rigidbody>());
             //weapon.GetComponent<Rigidbody>().useGravity = false;
 
-            if(weapon.equipType == WeaponEquipType.Hand) weapon.transform.SetParent(weaponManager.hand.transform);
-            if(weapon.equipType == WeaponEquipType.Head) weapon.transform.SetParent(weaponManager.head.transform);
+            if (weapon.equipType == WeaponEquipType.Left_Hand) weapon.transform.SetParent(weaponManager.left_Hand.transform);
+            if (weapon.equipType == WeaponEquipType.Right_Hand) weapon.transform.SetParent(weaponManager.right_Hand.transform);
+            if (weapon.equipType == WeaponEquipType.Head) weapon.transform.SetParent(weaponManager.head.transform);
 
             weapon.transform.localPosition = weapon.weaponEquipPos;
             weapon.transform.localRotation = Quaternion.Euler(weapon.weaponEquipRot);
