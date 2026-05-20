@@ -172,7 +172,7 @@ public class EnemyController : Entity
 
 
         if (other.CompareTag("Weapon") 
-            && (!weaponManager.hand.GetComponentInChildren<WeaponObject>() && !weaponManager.head.GetComponentInChildren<WeaponObject>()))
+            && (!weaponManager.left_Hand.GetComponentInChildren<WeaponObject>() && !weaponManager.head.GetComponentInChildren<WeaponObject>()))
         {
             WeaponObject weapon;
             if (other.TryGetComponent<WeaponObject>(out weapon))
@@ -304,10 +304,10 @@ public class EnemyController : Entity
         transform.GetComponentInChildren<Animator>().SetTrigger("Die");
 
 
-        if (!weaponManager.hand) return;
+        if (!weaponManager.left_Hand) return;
 
         WeaponObject treshWeapon = null;
-        foreach (Transform weaponTr in weaponManager.hand.GetComponentInChildren<Transform>())
+        foreach (Transform weaponTr in weaponManager.left_Hand.GetComponentInChildren<Transform>())
         {
             if (weaponTr.gameObject.CompareTag("Weapon"))
             {
@@ -344,8 +344,11 @@ public class EnemyController : Entity
 
         capCollider.enabled = false;
 
-        nmAgent.ResetPath();
-        nmAgent.isStopped = true;
+        if (nmAgent.enabled)
+        {
+            nmAgent.ResetPath();
+            nmAgent.isStopped = true;
+        }
         nmAgent.enabled = false;
 
         GameManager.Instance.Money++;
@@ -392,7 +395,8 @@ public class EnemyController : Entity
         if (isHit) return;
 
         movement.Movable = true;
-        nmAgent.isStopped = false;
+
+        if (nmAgent.enabled) nmAgent.isStopped = false;
     }
 }
 

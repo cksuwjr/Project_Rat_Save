@@ -256,6 +256,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isDead: 0
+  isHit: 0
 --- !u!114 &7097780191782982881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,8 +309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d03f3acb115b45bb557633e587bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 3024590440788662737}
+  left_Hand: {fileID: 3024590440788662737}
+  right_Hand: {fileID: 8955076604271209939}
   head: {fileID: 5564910285852853562}
+  back: {fileID: 6575517771605020661}
   weaponRange: 0
   skills:
   - {fileID: 0}
@@ -954,6 +957,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7103805344955401679}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &6575517771605020661 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4167280743394806330, guid: a23e8009c98d1184fbcc0a2b4e60fb49,
+    type: 3}
+  m_PrefabInstance: {fileID: 7103805344955401679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7286666072045642276 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a23e8009c98d1184fbcc0a2b4e60fb49,
@@ -987,3 +996,9 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &8955076604271209939 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2221149739073251356, guid: a23e8009c98d1184fbcc0a2b4e60fb49,
+    type: 3}
+  m_PrefabInstance: {fileID: 7103805344955401679}
+  m_PrefabAsset: {fileID: 0}

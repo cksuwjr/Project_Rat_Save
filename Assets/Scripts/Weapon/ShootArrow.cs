@@ -38,7 +38,7 @@ public class ShootArrow : Skill
 
         var arrow = PoolManager.Instance.arrowPool.GetPoolObject();
 
-        arrow.transform.position = weaponManager.hand.transform.position;
+        arrow.transform.position = weaponManager.left_Hand.transform.position;
 
         arrow.GetComponent<Projectile>().Init(controller, controller.GetDirection, damage + status.AttackPower * 0.3f, 22f);
 
