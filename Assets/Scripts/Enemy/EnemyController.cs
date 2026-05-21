@@ -148,9 +148,9 @@ public class EnemyController : Entity
     {
         movement?.Move(Vector3.zero, status.MoveSpeed);
 
-        int num = UnityEngine.Random.Range(1, 3);
+        GetComponent<Movement>()?.See(target.GetComponent<Entity>());
 
-        
+        int num = UnityEngine.Random.Range(1, 3);
 
         switch (num)
         {
