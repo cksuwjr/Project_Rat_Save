@@ -15,57 +15,61 @@ public class GetWeapon : Skill
 
         yield return YieldInstructionCache.WaitForSeconds(0.35f);
 
-        WeaponObject treshWeapon = null;
+        WeaponObject left_TreshWeapon = null;
         foreach(Transform weaponTr in weaponManager.left_Hand.GetComponentInChildren<Transform>())
         {
             if(weaponTr.gameObject.CompareTag("Weapon"))
             {
-                if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
+                if (weaponTr.TryGetComponent<WeaponObject>(out left_TreshWeapon))
                 {
-                    //if (treshWeapon.weaponType == WeaponType.Glove) break;
+                    if (left_TreshWeapon.weaponType == WeaponType.Glove) break;
 
 
-                    treshWeapon.transform.SetParent(null);
-                    treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    left_TreshWeapon.transform.SetParent(null);
+                    left_TreshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                     //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                    treshWeapon.isUse = false;
+                    left_TreshWeapon.isUse = false;
 
-                    treshWeapon.AddComponent<Rigidbody>();
+                    left_TreshWeapon.AddComponent<Rigidbody>();
                     break;
                 }
             }
 
         }
+
+        WeaponObject right_TreshWeapon = null;
         foreach (Transform weaponTr in weaponManager.right_Hand.GetComponentInChildren<Transform>())
         {
             if (weaponTr.gameObject.CompareTag("Weapon"))
             {
-                if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
+                if (weaponTr.TryGetComponent<WeaponObject>(out right_TreshWeapon))
                 {
-                    //if (treshWeapon.weaponType == WeaponType.Glove) break;
+                    if (right_TreshWeapon.weaponType == WeaponType.Glove) break;
 
-                    treshWeapon.transform.SetParent(null);
-                    treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    right_TreshWeapon.transform.SetParent(null);
+                    right_TreshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                     //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                    treshWeapon.isUse = false;
+                    right_TreshWeapon.isUse = false;
 
-                    treshWeapon.AddComponent<Rigidbody>();
+                    right_TreshWeapon.AddComponent<Rigidbody>();
                     break;
                 }
             }
         }
+
+        WeaponObject head_TreshWeapon = null;
         foreach (Transform weaponTr in weaponManager.head.GetComponentInChildren<Transform>())
         {
             if (weaponTr.gameObject.CompareTag("Weapon"))
             {
-                if (weaponTr.TryGetComponent<WeaponObject>(out treshWeapon))
+                if (weaponTr.TryGetComponent<WeaponObject>(out head_TreshWeapon))
                 {
-                    treshWeapon.transform.SetParent(null);
-                    treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    head_TreshWeapon.transform.SetParent(null);
+                    head_TreshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                     //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                    treshWeapon.isUse = false;
+                    head_TreshWeapon.isUse = false;
 
-                    treshWeapon.AddComponent<Rigidbody>();
+                    head_TreshWeapon.AddComponent<Rigidbody>();
                     break;
                 }
             }
@@ -84,27 +88,61 @@ public class GetWeapon : Skill
                 if (col.gameObject == weaponManager.head.gameObject) continue;
 
                 if (col.TryGetComponent<WeaponObject>(out weapon))
-                    if (treshWeapon == weapon || weapon.isUse)
+                {
+                    if (left_TreshWeapon == weapon || right_TreshWeapon == weapon || head_TreshWeapon == weapon || weapon.isUse)
                     {
                         weapon = null;
                         continue;
                     }
+                }
             }
         }
 
         if (weapon)
         {
-            if (treshWeapon != null)
-            if(weapon.weaponType != WeaponType.Glove && treshWeapon.weaponType == WeaponType.Glove)
+            if (left_TreshWeapon != null && right_TreshWeapon != null)
             {
-                treshWeapon.transform.SetParent(null);
-                treshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                left_TreshWeapon.transform.SetParent(null);
+                left_TreshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                treshWeapon.isUse = false;
+                left_TreshWeapon.isUse = false;
 
-                treshWeapon.AddComponent<Rigidbody>();
+                left_TreshWeapon.AddComponent<Rigidbody>();
+
+                right_TreshWeapon.transform.SetParent(null);
+                right_TreshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                right_TreshWeapon.isUse = false;
+
+                right_TreshWeapon.AddComponent<Rigidbody>();
+
+                Debug.Log("À¸¾î");
             }
+            else
+            {
+                if (left_TreshWeapon != null)
+                    if (weapon.weaponType != WeaponType.Glove && left_TreshWeapon.weaponType == WeaponType.Glove)
+                    {
+                        left_TreshWeapon.transform.SetParent(null);
+                        left_TreshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                        //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                        left_TreshWeapon.isUse = false;
 
+                        left_TreshWeapon.AddComponent<Rigidbody>();
+                    }
+
+                if (right_TreshWeapon != null)
+                    if (weapon.weaponType != WeaponType.Glove && right_TreshWeapon.weaponType == WeaponType.Glove)
+                    {
+                        right_TreshWeapon.transform.SetParent(null);
+                        right_TreshWeapon.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                        //treshWeapon.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                        right_TreshWeapon.isUse = false;
+
+                        right_TreshWeapon.AddComponent<Rigidbody>();
+                    }
+            }
+            
 
 
             weapon.GetComponent<BoxCollider>().isTrigger = true;

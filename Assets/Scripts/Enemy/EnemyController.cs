@@ -149,6 +149,7 @@ public class EnemyController : Entity
         movement?.Move(Vector3.zero, status.MoveSpeed);
 
         GetComponent<Movement>()?.See(target.GetComponent<Entity>());
+        yield return YieldInstructionCache.WaitForSeconds(0.05f);
 
         int num = UnityEngine.Random.Range(1, 3);
 
@@ -351,7 +352,12 @@ public class EnemyController : Entity
         }
         nmAgent.enabled = false;
 
-        GameManager.Instance.Money++;
+        for (int i = 0; i < Random.Range(0, 4); i++)
+        {
+            var jewel = PoolManager.Instance.jewelPool.GetPoolObject();
+            jewel.transform.position = transform.position;
+            jewel.GetComponent<Jewel>().InitJewel();
+        }
     }
 
     public void GetCC(float time)
