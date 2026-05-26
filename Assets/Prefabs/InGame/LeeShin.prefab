@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 8
-  equipType: 1
-  weaponEquipPos: {x: -0.4, y: 0.02, z: 0}
+  equipType: 2
+  weaponEquipPos: {x: -0.4, y: 0, z: 0}
   weaponEquipRot: {x: 180, y: 90, z: 0}
   weaponEquipScale: {x: 1, y: 1, z: 1}
   isUse: 0

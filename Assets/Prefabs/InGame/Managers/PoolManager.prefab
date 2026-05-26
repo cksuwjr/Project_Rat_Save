@@ -282,6 +282,53 @@ MonoBehaviour:
   poolObject: {fileID: 1151497244416976780, guid: 76a24600b3d24cf4885148019a4f661e,
     type: 3}
   poolCount: 10
+--- !u!1 &6517384228903469214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496371950876714066}
+  - component: {fileID: 1869338232474634279}
+  m_Layer: 0
+  m_Name: JewelPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496371950876714066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517384228903469214}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8318517223688747574}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869338232474634279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517384228903469214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13389d841cd561543b739f4a9c8bc6a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObject: {fileID: 4862737914185556964, guid: 216805a93273f294e83a8343bd27167f,
+    type: 3}
+  poolCount: 10
 --- !u!1 &8080676930481323746
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +483,7 @@ Transform:
   - {fileID: 747554868794109159}
   - {fileID: 2724559524915838102}
   - {fileID: 3525554340365329669}
+  - {fileID: 496371950876714066}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7532407321974450496
@@ -457,3 +505,4 @@ MonoBehaviour:
   blackCatPool: {fileID: 0}
   arrowPool: {fileID: 0}
   leeshinQPool: {fileID: 0}
+  jewelPool: {fileID: 0}
