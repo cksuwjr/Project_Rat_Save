@@ -20,6 +20,7 @@ public class PoolManager : SingletonDestroy<PoolManager>, IManager
 
     public Pool jewelPool;
 
+    public Pool bulletPool;
 
     public void Init()
     {
@@ -39,6 +40,7 @@ public class PoolManager : SingletonDestroy<PoolManager>, IManager
 
         transform.GetChild(count++).TryGetComponent<Pool>(out jewelPool);
 
+        transform.GetChild(count++).TryGetComponent<Pool>(out bulletPool);
 
         damagePool?.Init();
 
@@ -55,6 +57,8 @@ public class PoolManager : SingletonDestroy<PoolManager>, IManager
         leeshinQPool?.Init();
 
         jewelPool?.Init();
+
+        bulletPool?.Init();
     }
 
     public Pool GetPool(int n)

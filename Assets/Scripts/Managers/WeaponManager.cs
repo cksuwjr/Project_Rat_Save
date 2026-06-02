@@ -97,6 +97,19 @@ public class WeaponManager : MonoBehaviour
 
                 break;
 
+            case WeaponType.Sword:
+                skills[0] = gameObject.AddComponent<Punch>();
+                skills[0].Init(KeyInput.Fire1, 0.7f, SkillType.Base, 200f);
+                skills[0].skill_Level = 1;
+
+                //skills[1] = gameObject.AddComponent<Kick>();
+                //skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 70f);
+                //skills[1].skill_Level = 1;
+
+                weaponRange = 2f;
+
+                break;
+
             case WeaponType.Glove:
                 if (left_Hand.GetComponentInChildren<WeaponObject>())
                 {
@@ -118,6 +131,32 @@ public class WeaponManager : MonoBehaviour
 
 
             case WeaponType.Bow:
+                skills[0] = gameObject.AddComponent<ShootArrow>();
+                skills[0].Init(KeyInput.Fire1, 0.2f, SkillType.Base, 35f);
+                skills[0].skill_Level = 1;
+
+                skills[1] = gameObject.AddComponent<RollingShoot>();
+                skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 35f);
+                skills[1].skill_Level = 1;
+
+                weaponRange = 8f;
+
+                break;
+
+            case WeaponType.Gun:
+                skills[0] = gameObject.AddComponent<ShootArrow>();
+                skills[0].Init(KeyInput.Fire1, 0.2f, SkillType.Base, 35f);
+                skills[0].skill_Level = 1;
+
+                skills[1] = gameObject.AddComponent<RollingShoot>();
+                skills[1].Init(KeyInput.Fire2, 1f, SkillType.Base, 35f);
+                skills[1].skill_Level = 1;
+
+                weaponRange = 8f;
+
+                break;
+
+            case WeaponType.ShotGun:
                 skills[0] = gameObject.AddComponent<ShootArrow>();
                 skills[0].Init(KeyInput.Fire1, 0.2f, SkillType.Base, 35f);
                 skills[0].skill_Level = 1;

@@ -31,6 +31,7 @@ public class EnemyController : Entity
 {
     private IMove movement;
     private WeaponManager weaponManager;
+    private SphereCollider findRangeCol;
 
     private bool hittable = true;
 
@@ -128,7 +129,6 @@ public class EnemyController : Entity
             if (target.CompareTag("Player") && Vector3.Distance(transform.position, target.transform.position) < weaponManager.weaponRange)
             {
                 nmAgent.isStopped = true;
-                GetComponent<Movement>().See(target.GetComponent<Entity>(), 4000);
                 ChangeState(EnemyState.Attack);
             }
             if (target.CompareTag("Weapon") && Vector3.Distance(transform.position, target.transform.position) < 1.3f)
@@ -163,6 +163,7 @@ public class EnemyController : Entity
                 break;
         }
         yield return YieldInstructionCache.WaitForSeconds(0.7f);
+        nmAgent.isStopped = false;
         ChangeState(EnemyState.Chase);
     }
 
@@ -240,12 +241,15 @@ public class EnemyController : Entity
         TryGetComponent<NavMeshAgent>(out nmAgent);
 
         TryGetComponent<CapsuleCollider>(out capCollider);
+
+        TryGetComponent<SphereCollider>(out findRangeCol);
     }
 
     public override void Init(float hp, float speed)
     {
         base.Init(hp, speed);
 
+        findRangeCol.radius = 10;
         weaponManager?.Init();
         StartAct();
 
@@ -260,6 +264,13 @@ public class EnemyController : Entity
 
         OnChangeHp?.Invoke(status.HP, status.HP, status.MaxHP);
 
+        Invoke("ExtendFindRange", 10f);
+    }
+
+    private void ExtendFindRange()
+    {
+        findRangeCol.radius += 0.5f;
+        Invoke("ExtendFindRange", 10f);
     }
 
     public override void GetDamage(Entity attacker, float damage, SkillType skillType, float knockbackTime = 3f, int effectNum = 0)
@@ -293,6 +304,8 @@ public class EnemyController : Entity
     protected override void Die()
     {
         base.Die();
+
+        CancelInvoke("ExtendFindRange");
 
         StopAllCoroutines();
 
